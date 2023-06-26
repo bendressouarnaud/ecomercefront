@@ -1,0 +1,305 @@
+<div class="main-content" style=" margin-top: 0px;">
+    <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content" style="background:linear-gradient(#B7D4F0, 50%, white);">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Renseigner les donn&eacute;es</h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="get" action="/" class="form-horizontal">
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Donn&eacute;es</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-2">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="idmag" name='idmag' type="text" disabled placeholder="idmag">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="numero" name='numero' type="text"
+                                                    placeholder="Num&eacute;ro">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="denomination" name='denomination' type="text"
+                                                    placeholder="D&eacute;nomination">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-11 col-md-8 col-sm-4">
+                                            <mat-form-field style="font-size: 16px; font-weight: bold;">
+                                                <mat-select placeholder="Nature de la taxe" [(value)]="taxe" name="taxe" 
+                                                (selectionChange)="onTaxeChange()" style="background-color: #cad692;">
+                                                    <mat-option *ngFor="let dt of listeNomenclature"
+                                                        [value]="dt.idnom">
+                                                        {{ dt.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div> 
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--  -->
+                            <div class="row" *ngIf="this.hideDetail">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-11 col-md-8 col-sm-4">
+                                            <mat-form-field style="font-size: 16px; font-weight: bold;">
+                                                <mat-select placeholder="D&eacute;tail" [(value)]="idetail" name="idetail" 
+                                                (selectionChange)="onDisplayDetail()" style="background-color: #d4b6d0;">
+                                                    <mat-option *ngFor="let dt of listeDetailNom"
+                                                        [value]="dt.idnmd">
+                                                        {{ dt.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div> 
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row" *ngIf="this.hideDetail">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="periodicite" name='periodicite' type="text" disabled 
+                                                placeholder="P&eacute;riodicit&eacute;">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="cot" name='cot' type="text" disabled 
+                                                    placeholder="C&ucirc;ut">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="unt" name='unt' type="text" disabled 
+                                                    placeholder="Unit&eacute;">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-5 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Emplacement" [(value)]="idsit" name="idsit">
+                                                    <mat-option *ngFor="let dt of listeEmplacement"
+                                                        [value]="dt.idsit">
+                                                        {{ dt.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>                                            
+
+                                        <div class="col-lg-3 col-md-8 col-sm-4">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Superficie" [(value)]="superficie" name="superficie">
+                                                    <mat-option *ngFor="let dt of listeSuperficie"
+                                                        [value]="dt.idsup">
+                                                        {{ dt.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Taxe ODP"
+                                                    [(value)]="odp" name="odp" style="background-color: #afe4a3;" 
+                                                    (selectionChange)="onOdpChange()" id='taxeodp' [disabled]=isOdpDisabled>
+                                                    <mat-option [value]="1">Oui</mat-option>
+                                                    <mat-option [value]="0">Non</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Date mise en service</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <mat-form-field>
+                                                <input matInput [matDatepicker]="basicDatepicker" [(ngModel)]="dateService"
+                                                    name="dates">
+                                                <mat-datepicker-toggle matSuffix [for]="basicDatepicker">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #basicDatepicker></mat-datepicker>
+                                            </mat-form-field>
+                                        </div> 
+                                        
+                                        <div class="col-md-3">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="recettebrute" name='recettebrute' type="text"  
+                                                id='recettebrute'
+                                                    placeholder="Valeur locative | Recette brute">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="button" (click)="enregistrerMagasin()"
+                            class="btn btn-success">Enregistrer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row" style=" margin-top: 0px;">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="page-categories">
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/superviseur/accueilman" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/icone_accueil.png" width="85" height="70" />
+                                </i> Accueil
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/superviseur/clientman" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/client.jpeg" width="85" height="70" />
+                                </i> Clients
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link icone active" (click)="ouvrirzonecom()" role="tablist">
+                            <i class="material-icons">
+                                <img src="assets/img/ajout.png" width="85" height="70"/>
+                            </i> Nouveau
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link icone" href="#/superviseur/location" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/location.jpeg" width="85" height="70" />
+                                </i> Location
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/superviseur/stats" role="tablist">
+                                <i class="material-icons"><img src="assets/img/statistique.png" width="85"
+                                        height="70" /></i> Statistiques
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <!--  Add -->
+        <div class="col-md-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="toolbar">
+                        <!--        Here you can write extra buttons/actions for the toolbar              -->
+                    </div>
+                    <div class="material-datatables">
+                        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0"
+                            width="100%" style="width:100%" *ngIf="this.getMagasin">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Num&eacute;ro</th>
+                                    <th>D&eacute;tail taxe</th>
+                                    <th>Co&ucirc;t</th>
+                                    <th class="disabled-sorting text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dt of listeMagasin">
+                                    <td>{{ dt.idmag }}</td>
+                                    <td style="font-weight: bold;">{{ dt.numero }}</td>
+                                    <td>{{ dt.emplacement }}</td>
+                                    <td style="font-weight: bold;">{{ dt.superficie.toLocaleString() }}</td>
+                                    <td class="text-center">
+                                        <a title="Consulter les donn&eacute;es" *ngIf="dt.location == 0" 
+                                            (click)="getDataBack(dt.idmag)" class="btn btn-link btn-success btn-just-icon edit"><i
+                                                class="material-icons">edit_note</i></a>
+                                        <a title="Afficher sur la carte" href="#/superviseur/carte/{{dt.idmag}}"
+                                            class="btn btn-link btn-danger btn-just-icon edit"
+                                            *ngIf="dt.latlon > 0"><i class="material-icons">pin_drop</i></a>
+                                        <!--
+                                        &nbsp;
+
+                                        <a title="Bloquer le compte" (click)="desactivercompte(commerciaux.email)"
+                                            class="btn btn-link btn-danger btn-just-icon edit"
+                                            *ngIf="commerciaux.modes == '0'"><i
+                                                class="material-icons">disabled_by_default</i></a>-->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- end content-->
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<!--<h1>{{ title }}</h1>-->
+
+<div class="main-content" style=" margin-top: 0px;">
+  <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">
+
+    <div class="row" style=" margin-top: 0px;">
+      <div class="col-md-12 ml-auto mr-auto">
+        <div class="page-categories">
+          <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+
+            <li class="nav-item">
+              <a class="nav-link" href="#/superviseur/accueilman" role="tablist">
+                <i class="material-icons">
+                  <img src="assets/img/icone_accueil.png" width="85" height="70" />
+                </i> Accueil
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#/superviseur/clientman" role="tablist">
+                <i class="material-icons">
+                  <img src="assets/img/client.jpeg" width="85" height="70" />
+                </i> Clients
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#/superviseur/magasin" role="tablist">
+                <i class="material-icons">
+                  <img src="assets/img/magasin.jpeg" width="85" height="70" />
+                </i> Bien
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link icone" href="#/superviseur/location" role="tablist">
+                <i class="material-icons">
+                  <img src="assets/img/location.jpeg" width="85" height="70" />
+                </i> Location
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#/superviseur/stats" role="tablist">
+                <i class="material-icons"><img src="assets/img/statistique.png" width="85" height="70" /></i>
+                Statistiques
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12" style=" margin-top: 10px; ">
+      <!-- this creates a google map on the page with the given lat/lng from -->
+      <!-- the component as the initial center of the map: -->
+      <agm-map *ngIf="gpsdata.libelle.length > 0" [latitude]="gpsdata.latitude" [longitude]="gpsdata.longitude">
+        <agm-marker [latitude]="gpsdata.latitude" [longitude]="gpsdata.longitude"></agm-marker>
+      </agm-map>
+    </div>
+  </div>
+</div>
