@@ -1,0 +1,214 @@
+<div class="main-content" style=" margin-top: 0px;">
+    <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">
+
+
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content" style="background:linear-gradient(#B7D4F0, 25%, white);">
+                <div class="modal-header">
+                  <h4 class="modal-title">Renseigner les informations</h4>
+                  <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">clear</i>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form method="get" action="/" class="form-horizontal">
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Donn&eacute;es</label>
+                            <div class="col-sm-10">
+                                <div class="row">
+                                    
+                                    <div class="col-md-3">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput [(ngModel)]="id" name='id' type="text" disabled placeholder="id">
+                                        </mat-form-field>
+                                    </div>
+                                    
+                                    <div class="col-md-7">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput [(ngModel)]="libelle" name='libelle' type="text" placeholder="Libell&eacute;">
+                                    </mat-form-field>
+                                    </div>
+                                        
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">&nbsp;</label>
+                            <div class="col-sm-10">
+                                <div class="row">                                    
+                                    <div class="col-md-3">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput [(ngModel)]="prix" name='prix' type="text" 
+                                            placeholder="Prix">
+                                        </mat-form-field>
+                                    </div>     
+                                    
+                                    <div class="col-md-3">                                        
+                                        <mat-form-field>
+                                            <mat-select placeholder="Produits" [(value)]="idprod" name="idprod" id="idprod"
+                                            (selectionChange)="onProduitChange()">
+                                                <mat-option *ngFor="let dl of listeproduit"
+                                                    [value]="dl.idprd">
+                                                    {{ dl.libelle }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>  
+
+                                    <div class="col-md-4" *ngIf="this.getDataSous">                                        
+                                        <mat-form-field>
+                                            <mat-select placeholder="Sous-Produits" [(value)]="idspr" name="idspr" id="idspr" 
+                                            >
+                                                <mat-option *ngFor="let dt of listesousproduit"
+                                                    [value]="dt.idspr">
+                                                    {{ dt.libelle }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div> 
+
+                                </div>
+                            </div>
+                        </div>   
+
+                        <div class="row">   
+                            <label class="col-sm-2 col-form-label">&nbsp;</label>                                 
+                            <div class="col-md-5">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput [(ngModel)]="detail" name='detail' type="text" 
+                                    placeholder="D&eacute;tail" 
+                                    maxlength="45">
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-5">
+                                <button type="button" mat-raised-button (click)="fileInput.click()" class="btn btn-default">
+                                    <i class="material-icons">upload_file</i> S&eacute;lectionner un fichier
+                                </button>
+                                <input hidden (change)="onFileSelected($event)" #fileInput type="file">
+                            </div>
+                        </div>
+
+                        <div class="row">   
+                            <label class="col-sm-2 col-form-label">&nbsp;</label>
+                            <div class="col-md-5">
+                                <label class="col-form-label">{{ libfichier }}</label>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <button mat-raised-button type="button" (click)="enregistrer()" 
+                    class="btn btn-success" data-dismiss="modal">Enregistrer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        <div class="row" style=" margin-top: 0px;">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="page-categories">
+                    <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/comptes" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/icone_accueil.png" width="85" height="70" />
+                                </i> Accueil
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/superficie" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/superficie.png" width="85" height="70" />
+                                </i> Superficie
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/emplacement" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/zone.jpeg" width="85" height="70" />
+                                </i> Emplacement
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link icone active" (click)="ouvrirzonegestion()" role="tablist">
+                            <i class="material-icons">
+                                <img src="assets/img/ajout.png" width="85" height="70"/>
+                            </i> Nouveau
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/detailnomenclature" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/detail.jpeg" width="85" height="70" />
+                                </i> D&eacute;tail
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#/gestion/parametre" role="tablist">
+                                <i class="material-icons"><img src="assets/img/parametrespng.png" width="85"
+                                        height="70" /></i> Param&egrave;tres
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <!--  Add -->
+            <div class="col-md-12">
+
+                <div class="card">
+                      <div class="card-body">
+                          <div class="toolbar">
+                              <!--        Here you can write extra buttons/actions for the toolbar              -->
+                          </div>
+                          <div class="material-datatables">
+                            <table id="datatables" class="table table-striped table-no-bordered table-hover" 
+                              cellspacing="0" width="100%" style="width:100%" *ngIf="this.getData">
+                                  <thead>
+                                      <tr>
+                                        <th>Id</th>
+                                        <th>Libell&eacute;</th>
+                                        <th>Fr&eacute;quence (mois)</th>
+                                        <th class="disabled-sorting text-center">Actions</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr *ngFor="let dt of liste">
+                                        <td>{{ dt.idper }}</td>
+                                        <td>{{ dt.libelle }}</td>
+                                        <td>{{ dt.frequence }}</td>
+                                        <td class="text-center">
+                                            <a title="Modifier"
+                                            (click)="afficherDonnee( dt.idper, dt.libelle, dt.frequence, dt.codes, dt.jour )"
+                                            class="btn btn-link btn-danger btn-just-icon edit"><i
+                                                class="material-icons">dvr</i></a>
+                                        </td>
+                                    </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                      <!-- end content-->
+                  </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>

@@ -27,6 +27,7 @@ import { StatdevisattenteComponent } from './statdevisattente/statdevisattente.c
 import { StatdevisequipeComponent } from './statdevisequipe/statdevisequipe.component';
 import { UserdetailsComponent } from './userdetails/userdetails.component';
 import { GestionmairieComponent } from './gestionmairie/gestionmairie.component';
+import { ArticleComponent } from './article/article.component';
 
 const routes: Routes = [
   {
@@ -80,8 +81,8 @@ const routes: Routes = [
     component: ConfigequipeComponent
   },
   {
-    path:'superficie',
-    component: ConfigmotifComponent
+    path:'article',
+    component: ArticleComponent
   },
   {
     path:'nomenclature',

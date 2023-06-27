@@ -41,10 +41,11 @@ import { SanteavantageComponent } from './santeavantage/santeavantage.component'
 import { EmplacementComponent } from './emplacement/emplacement.component';
 import { PeriodeComponent } from './periode/periode.component';
 import { GestionmairieComponent } from './gestionmairie/gestionmairie.component';
+import { ArticleComponent } from './article/article.component';
 
 
 @NgModule({
-  declarations: [GestioncompteComponent, GestioncommerceComponent, GestionrapportComponent, AccueilsupComponent, ConfigactiviteComponent, RdvsupComponent, AgendasupComponent, ReunionComponent, PerformanceComponent, HistoriqueComponent, AddresseComponent, ConfigequipeComponent, ConfigmotifComponent, NomenclatureComponent, DetailnomenclatureComponent, ParametresComponent, DevisComponent, StatdevisequipeComponent, StatdevisattenteComponent, ActivitecommercialeComponent, ClientsComponent, UserdetailsComponent, SantefamilleComponent, SanteavantageComponent, EmplacementComponent, PeriodeComponent, GestionmairieComponent],
+  declarations: [GestioncompteComponent, GestioncommerceComponent, GestionrapportComponent, AccueilsupComponent, ConfigactiviteComponent, RdvsupComponent, AgendasupComponent, ReunionComponent, PerformanceComponent, HistoriqueComponent, AddresseComponent, ConfigequipeComponent, ConfigmotifComponent, NomenclatureComponent, DetailnomenclatureComponent, ParametresComponent, DevisComponent, StatdevisequipeComponent, StatdevisattenteComponent, ActivitecommercialeComponent, ClientsComponent, UserdetailsComponent, SantefamilleComponent, SanteavantageComponent, EmplacementComponent, PeriodeComponent, GestionmairieComponent, ArticleComponent],
   imports: [
     CommonModule,
     ComptesRoutingModule,
