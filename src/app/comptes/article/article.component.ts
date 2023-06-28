@@ -41,7 +41,7 @@ export class ArticleComponent implements OnInit {
 
   ngOnInit(): void {
     this.getcompanyarticles();
-    this.getsousproduitlib();
+    //this.getsousproduitlib();
     this.getproduitlib();
   }
 
@@ -130,6 +130,9 @@ export class ArticleComponent implements OnInit {
           // Succes
           this.listeproduit = resultat;
           this.idprod = resultat[0].idprd;
+
+          // Call this :
+          this.getsousproduitlib();
         }
       )
   }
@@ -145,6 +148,9 @@ export class ArticleComponent implements OnInit {
           // Keep that one 
           this.tamponSousProduit = resultat;
           this.getDataSous = true;
+
+          // Call this to make the update :
+          this.onProduitChange();
         }
       )
   }
@@ -169,17 +175,25 @@ export class ArticleComponent implements OnInit {
     } 
 
     let tp :Beansousproduit[] = new Array(cpt);
-    this.tamponSousProduit.forEach(
-      d => {
-        if(parseInt(d.produit) == this.idprod){
-          // Fill ARRAY :
-          tp.push(d);
-        }
+
+    cpt = 0;
+    for(let j = 0; j < this.tamponSousProduit.length; j++){
+      if(  parseInt(this.tamponSousProduit[j].produit) == this.idprod){
+        // Fill ARRAY :
+        let t = new Beansousproduit();
+        t.idspr = this.tamponSousProduit[j].idspr;
+        t.libelle = this.tamponSousProduit[j].libelle;
+        t.produit = this.tamponSousProduit[j].produit;
+        tp[cpt] = t;
+        cpt++;
       }
-    );
-    // Try to refresh :
-    this.listesousproduit = tp;
-    this.getDataSous = true;
+    }
+
+    if(cpt > 0){
+      // Try to refresh :
+      this.listesousproduit = tp;
+      this.idspr = tp[0].idspr;
+    }
   }
 
   onFileSelected(event) {

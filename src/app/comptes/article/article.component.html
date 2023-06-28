@@ -58,10 +58,9 @@
                                         </mat-form-field>
                                     </div>  
 
-                                    <div class="col-md-4" *ngIf="this.getDataSous">                                        
+                                    <div class="col-md-4">                                        
                                         <mat-form-field>
-                                            <mat-select placeholder="Sous-Produits" [(value)]="idspr" name="idspr" id="idspr" 
-                                            >
+                                            <mat-select placeholder="Sous-Produits" [(value)]="idspr" name="idspr" id="idspr">
                                                 <mat-option *ngFor="let dt of listesousproduit"
                                                     [value]="dt.idspr">
                                                     {{ dt.libelle }}
@@ -124,22 +123,6 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#/gestion/superficie" role="tablist">
-                                <i class="material-icons">
-                                    <img src="assets/img/superficie.png" width="85" height="70" />
-                                </i> Superficie
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#/gestion/emplacement" role="tablist">
-                                <i class="material-icons">
-                                    <img src="assets/img/zone.jpeg" width="85" height="70" />
-                                </i> Emplacement
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
                             <a class="nav-link icone active" (click)="ouvrirzonegestion()" role="tablist">
                             <i class="material-icons">
                                 <img src="assets/img/ajout.png" width="85" height="70"/>
@@ -179,17 +162,19 @@
                               cellspacing="0" width="100%" style="width:100%" *ngIf="this.getData">
                                   <thead>
                                       <tr>
-                                        <th>Id</th>
+                                        <th>Illustration</th>
                                         <th>Libell&eacute;</th>
-                                        <th>Fr&eacute;quence (mois)</th>
+                                        <th>Sous-produit</th>
+                                        <th>Prix</th>
                                         <th class="disabled-sorting text-center">Actions</th>
                                       </tr>
                                   </thead>
                                   <tbody>
                                     <tr *ngFor="let dt of liste">
-                                        <td>{{ dt.idper }}</td>
+                                        <td><img src="https://firebasestorage.googleapis.com/v0/b/gestionpanneaux.appspot.com/o/{{ dt.lienweb }}?alt=media" id="myimg" width="85" height="70" /></td>
                                         <td>{{ dt.libelle }}</td>
-                                        <td>{{ dt.frequence }}</td>
+                                        <td>{{ dt.appartenance }}</td>
+                                        <td>{{ dt.prix.toLocaleString() }}</td>
                                         <td class="text-center">
                                             <a title="Modifier"
                                             (click)="afficherDonnee( dt.idper, dt.libelle, dt.frequence, dt.codes, dt.jour )"
