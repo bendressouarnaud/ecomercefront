@@ -34,6 +34,8 @@ export class ArticleComponent implements OnInit {
   alreadyInit = false;
   formData = new FormData();
   getDataSous = false;
+  nombrearticle = 0;
+  actif: Number =0;
 
 
   // M e t h o d s :
@@ -58,6 +60,20 @@ export class ArticleComponent implements OnInit {
     this.id = "0";
     this.prix = "0";
     $('#myModal').modal();
+  }
+
+  //
+  miseajourarticle(idart: number){
+    this.liste.forEach(
+      d => {
+        if(d.idart == idart){
+          this.id = idart.toString();
+          this.actif = d.choix;
+          return;
+        }
+      }
+    );
+    $('#modalupdate').modal();
   }
 
   /* Get All Activities */
