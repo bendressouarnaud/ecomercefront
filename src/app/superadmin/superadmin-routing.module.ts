@@ -4,6 +4,7 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { MairieComponent } from './mairie/mairie.component';
 import { PoduitsComponent } from './poduits/poduits.component';
 import { SouspoduitsComponent } from './souspoduits/souspoduits.component';
+import { DetailsousproduitComponent } from './detailsousproduit/detailsousproduit.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path:'sousproduits',
     component: SouspoduitsComponent
+  },
+  {
+    path:'detailproduit',
+    component: DetailsousproduitComponent
   }
 ];
 

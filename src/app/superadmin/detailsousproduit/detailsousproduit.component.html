@@ -19,7 +19,7 @@
                             <div class="col-sm-10">
 
                                 <div class="row">                                    
-                                    <div class="col-md-3">
+                                    <div class="col-md-5">
                                         <mat-form-field class="example-full-width">
                                             <input matInput [(ngModel)]="libelle" name='libelle' type="text" 
                                             placeholder="Libell&eacute;" 
@@ -27,19 +27,44 @@
                                         </mat-form-field>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-5">
                                         <button type="button" mat-raised-button (click)="fileInput.click()" class="btn btn-default">
                                             <i class="material-icons">upload_file</i> S&eacute;lectionner un fichier
                                         </button>
                                         <input hidden (change)="onFileSelected($event)" #fileInput type="file">
+                                    </div>
+                                </div>
 
-                                        <!--<mat-form-field class="example-full-width">
-                                            <input matInput placeholder="CNI" type="file" id="cni" name="cni"
-                                                (change)="onCniSelected($event)" accept="image/png,image/jpeg,image/jpg" >
-                                        </mat-form-field>-->
+
+                                <div class="row">                                    
+                                    <div class="col-lg-5 col-md-8 col-sm-4">
+                                        <mat-form-field>
+                                            <mat-select placeholder="Produits" [(value)]="idprd" name="idprd" 
+                                            (selectionChange)="onProduitChange()">
+                                                <mat-option *ngFor="let dt of liste"
+                                                    [value]="dt.idprd">
+                                                    {{ dt.libelle }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-lg-5 col-md-8 col-sm-4">
+                                        <mat-form-field>
+                                            <mat-select placeholder="Sous-Produits" [(value)]="idspr" name="idspr">
+                                                <mat-option *ngFor="let dt of listeSousproduit"
+                                                    [value]="dt.idspr">
+                                                    {{ dt.libelle }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    
+                                </div>
+
+
+                                <div class="row">                                    
+                                    <div class="col-md-5">
                                         <label class="col-form-label">{{ libfichier }}</label>
                                     </div>
                                 </div>
@@ -83,10 +108,10 @@
                         
                         
                         <li class="nav-item">
-                            <a class="nav-link icone active" (click)="ouvrirzonegestion()" role="tablist">
+                            <a class="nav-link icone" href="#/superadmin/produit" role="tablist">
                                 <i class="material-icons">
                                     <img src="assets/img/produitadmin.jpeg" width="85" height="70" />
-                                </i> Produit
+                                </i> Produits
                             </a>
                         </li>
 
@@ -95,6 +120,14 @@
                                 <i class="material-icons">
                                     <img src="assets/img/mangue.jpeg" width="85" height="70" />
                                 </i> Sous-Produit
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link icone active" (click)="ouvrirzonegestion()" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/detailproduit.jpg" width="85" height="70" />
+                                </i> D&eacute;tail
                             </a>
                         </li>
                     </ul>
@@ -117,16 +150,20 @@
                                       <tr>
                                         <th>Illustration</th>
                                         <th>Libell&eacute;</th>
+                                        <th>Produit</th>
+                                        <th>Sous-Produit</th>
                                         <th class="disabled-sorting text-center">Actions</th>
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    <tr *ngFor="let donnee of liste">
+                                    <tr *ngFor="let donnee of listehisto">
                                         <td><img src="https://firebasestorage.googleapis.com/v0/b/gestionpanneaux.appspot.com/o/{{ donnee.lienweb }}?alt=media" id="myimg" width="85" height="70" /></td>
                                         <td style="font-weight: bold;">{{ donnee.libelle }}</td>
+                                        <td style="font-weight: bold;">{{ donnee.produit }}</td>
+                                        <td style="font-weight: bold;">{{ donnee.sousproduit }}</td>
                                         <td class="text-center">
                                             <a title="Modifier"
-                                            (click)="afficher( donnee.idprd )"
+                                            (click)="afficher( donnee.idspr )"
                                             class="btn btn-link btn-danger btn-just-icon edit"><i
                                                 class="material-icons">dvr</i></a>
                                         </td>
