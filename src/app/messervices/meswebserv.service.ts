@@ -112,6 +112,10 @@ import { Mairie } from "../mesbeans/mairie";
 import { Partenaire } from "../mesbeans/partenaire";
 import { Produits } from "../mesbeans/produits";
 import { Beansousproduit } from "../mesbeans/beansousproduit";
+import { Article } from "../mesbeans/article";
+import { Sousproduit } from "../mesbeans/sousproduit";
+import { Beandetail } from "../mesbeans/beandetail";
+import { Detail } from "../mesbeans/detail";
 
 @Injectable({
     providedIn: 'root'
@@ -328,6 +332,31 @@ export class MeswebservService {
             {});
     }
 
+    // Get DETAILS
+    gethistoriquesdetails(): Observable<Beandetail[]> {
+        return this.httpclient.get<Beandetail[]>(this.webserviceUri.concat("/gethistoriquesdetails"),
+            {});
+    }
+
+    // Get Sous-Produits DATA :
+    getsousproduitdata(): Observable<Sousproduit[]> {
+        return this.httpclient.get<Sousproduit[]>(this.webserviceUri.concat("/getsousproduitdata"),
+            {});
+    }
+
+    // Get ONLY Sous-Produits 'LIBs'
+    getsousproduitlib(): Observable<Beansousproduit[]> {
+        return this.httpclient.get<Beansousproduit[]>(this.webserviceUri.concat("/getsousproduitlib"),
+            {});
+    }
+
+
+    // Get detail DATA :
+    getAllDetails(): Observable<Detail[]> {
+        return this.httpclient.get<Detail[]>(this.webserviceUri.concat("/getAllDetails"),
+            {});
+    }
+
 
     // Get situation zone
     getAllSituationzone(): Observable<Situationzone[]> {
@@ -366,6 +395,12 @@ export class MeswebservService {
     // Get Periodes
     getperiodes(): Observable<Periode[]> {
         return this.httpclient.get<Periode[]>(this.webserviceUri.concat("/getperiodes"),
+            {});
+    }
+
+    // Get Articles
+    getcompanyarticles(): Observable<Article[]> {
+        return this.httpclient.get<Article[]>(this.webserviceUri.concat("/getcompanyarticles"),
             {});
     }
 
@@ -907,6 +942,16 @@ export class MeswebservService {
     // Save Sous-Produit:
     enregistrerSousProduit(donnees: FormData): Observable<Reponse> {
         return this.httpclient.post<Reponse>(this.webserviceUri.concat("/savesouspoducts"), donnees, {});
+    }
+
+    // Save DETAIL:
+    enregistrerDetail(donnees: FormData): Observable<Reponse> {
+        return this.httpclient.post<Reponse>(this.webserviceUri.concat("/savedetails"), donnees, {});
+    }
+
+    // Save Article:
+    enregistrerArticle(donnees: FormData): Observable<Reponse> {
+        return this.httpclient.post<Reponse>(this.webserviceUri.concat("/savearticles"), donnees, {});
     }
 
     // Save Emplacement:

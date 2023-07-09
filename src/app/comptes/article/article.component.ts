@@ -6,6 +6,7 @@ import { Article } from 'src/app/mesbeans/article';
 import { Beansousproduit } from 'src/app/mesbeans/beansousproduit';
 import * as moment from 'moment';
 import { Produits } from 'src/app/mesbeans/produits';
+import { Detail } from 'src/app/mesbeans/detail';
 
 declare const $: any;
 
@@ -21,6 +22,10 @@ export class ArticleComponent implements OnInit {
   listesousproduit: Beansousproduit[];
   tamponSousProduit: Beansousproduit[];
   listeproduit: Produits[];
+
+  listedetail: Detail[];
+  tamponDetail: Detail[];
+
   getData: boolean = false;
   basicDatepicker = "";
   publication = new Date();
@@ -28,6 +33,7 @@ export class ArticleComponent implements OnInit {
   prix = "0";
   idspr = 0;
   idprod = 0;
+  iddet = 0;
   libelle = "";
   detail = "";
   libfichier = "";
@@ -125,7 +131,7 @@ export class ArticleComponent implements OnInit {
     let dates = momentVariable.format('YYYY-MM-DD');
     this.formData.append("publication", dates);
     this.formData.append("detail", this.detail);
-    this.formData.append("idspr", this.idspr.toString());
+    this.formData.append("iddet", this.iddet.toString());
     this.meswebservices.enregistrerArticle(this.formData).toPromise().then(
       resultat => {
         if (resultat.element == "OK") {
@@ -167,6 +173,24 @@ export class ArticleComponent implements OnInit {
 
           // Call this to make the update :
           this.onProduitChange();
+          // Call :
+          this.getAllDetails();
+        }
+      )
+  }
+
+  getAllDetails(): void {
+    this.meswebservices.getAllDetails().toPromise()
+      .then(
+        resultat => {
+          // Succes
+          this.listedetail = resultat;
+          this.iddet = resultat[0].iddet;
+          // Keep that one 
+          this.tamponDetail = resultat;
+
+          // Call this to make the update :
+          this.onSousProduitChange();
         }
       )
   }
@@ -211,6 +235,48 @@ export class ArticleComponent implements OnInit {
       this.idspr = tp[0].idspr;
     }
   }
+
+
+  // 
+  onSousProduitChange(): void {
+    // Browse :    
+    let cpt = 0;
+    this.tamponDetail.forEach(
+      d => {
+        if(d.idspr == this.idspr){
+          cpt++;
+        }
+      }
+    );
+
+    if(cpt > 0){
+      this.listedetail = new Array(cpt);
+    } 
+
+    let tp :Detail[] = new Array(cpt);
+
+    cpt = 0;
+    for(let j = 0; j < this.tamponDetail.length; j++){
+      if(  this.tamponDetail[j].idspr == this.idspr){
+        // Fill ARRAY :
+        let t = new Detail();
+        t.idspr = this.tamponDetail[j].idspr;
+        t.libelle = this.tamponDetail[j].libelle;
+        t.iddet = this.tamponDetail[j].iddet;
+        t.lienweb = this.tamponDetail[j].lienweb;
+        tp[cpt] = t;
+        cpt++;
+      }
+    }
+
+    if(cpt > 0){
+      // Try to refresh :
+      this.listedetail = tp;
+      this.iddet = tp[0].iddet;
+    }
+  }
+
+
 
   onFileSelected(event) {
     const file: File = event.target.files[0];
