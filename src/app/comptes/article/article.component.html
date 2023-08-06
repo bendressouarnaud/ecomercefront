@@ -108,7 +108,7 @@
                                         <div class="col-md-4">
                                             <mat-form-field>
                                                 <mat-select placeholder="Sous-Produits" [(value)]="idspr" name="idspr"
-                                                    id="idspr">
+                                                    id="idspr" (selectionChange)="onSousProduitChange()">
                                                     <mat-option *ngFor="let dt of listesousproduit" [value]="dt.idspr">
                                                         {{ dt.libelle }}
                                                     </mat-option>
