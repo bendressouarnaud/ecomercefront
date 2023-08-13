@@ -28,6 +28,8 @@ import { StatdevisequipeComponent } from './statdevisequipe/statdevisequipe.comp
 import { UserdetailsComponent } from './userdetails/userdetails.component';
 import { GestionmairieComponent } from './gestionmairie/gestionmairie.component';
 import { ArticleComponent } from './article/article.component';
+import { RetourarticleComponent } from './retourarticle/retourarticle.component';
+import { PromotionComponent } from './promotion/promotion.component';
 
 const routes: Routes = [
   {
@@ -136,6 +138,14 @@ const routes: Routes = [
   {
     path:'gestionmairie',
     component: GestionmairieComponent
+  },
+  {
+    path:'delairetour',
+    component: RetourarticleComponent
+  },
+  {
+    path:'promotion',
+    component: PromotionComponent
   }
 ];
 

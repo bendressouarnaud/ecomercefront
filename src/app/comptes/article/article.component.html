@@ -19,7 +19,7 @@
                                 <div class="col-sm-10">
                                     <div class="row">
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-2">
                                             <mat-form-field class="example-full-width">
                                                 <input matInput [(ngModel)]="nombrearticle" name='nombrearticle' type="text"
                                                     placeholder="Nombre d'article">
@@ -37,6 +37,16 @@
                                             </mat-form-field>
                                         </div>
 
+                                        <div class="col-md-5">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Promotion" [(value)]="idprn" name="idprn"
+                                                    id="idprn">
+                                                    <mat-option *ngFor="let dt of listeHisto" [value]="dt.idprn">
+                                                        {{ dt.libelle }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>    
                                     </div>
                                 </div>
                             </div>
@@ -138,14 +148,26 @@
                                         <input matInput [(ngModel)]="prix" name='prix' type="text"
                                             placeholder="Prix">
                                     </mat-form-field>
+                                </div>                            
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+
+                                        <div class="col-lg-10 col-md-8 col-sm-4">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <textarea placeholder="Description"
+                                                        [(ngModel)]="detail" name="detail"
+                                                        class="form-control" rows="3" maxlength="290"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
-                                <div class="col-md-5">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput [(ngModel)]="detail" name='detail' type="text"
-                                            placeholder="D&eacute;tail" maxlength="45">
-                                    </mat-form-field>
-                                </div>
-                                
                             </div>
 
                             <div class="row">

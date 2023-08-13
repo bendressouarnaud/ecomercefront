@@ -43,10 +43,12 @@ import { PeriodeComponent } from './periode/periode.component';
 import { GestionmairieComponent } from './gestionmairie/gestionmairie.component';
 import { ArticleComponent } from './article/article.component';
 import { DetailComponent } from './detail/detail.component';
+import { RetourarticleComponent } from './retourarticle/retourarticle.component';
+import { PromotionComponent } from './promotion/promotion.component';
 
 
 @NgModule({
-  declarations: [GestioncompteComponent, GestioncommerceComponent, GestionrapportComponent, AccueilsupComponent, ConfigactiviteComponent, RdvsupComponent, AgendasupComponent, ReunionComponent, PerformanceComponent, HistoriqueComponent, AddresseComponent, ConfigequipeComponent, ConfigmotifComponent, NomenclatureComponent, DetailnomenclatureComponent, ParametresComponent, DevisComponent, StatdevisequipeComponent, StatdevisattenteComponent, ActivitecommercialeComponent, ClientsComponent, UserdetailsComponent, SantefamilleComponent, SanteavantageComponent, EmplacementComponent, PeriodeComponent, GestionmairieComponent, ArticleComponent, DetailComponent],
+  declarations: [GestioncompteComponent, GestioncommerceComponent, GestionrapportComponent, AccueilsupComponent, ConfigactiviteComponent, RdvsupComponent, AgendasupComponent, ReunionComponent, PerformanceComponent, HistoriqueComponent, AddresseComponent, ConfigequipeComponent, ConfigmotifComponent, NomenclatureComponent, DetailnomenclatureComponent, ParametresComponent, DevisComponent, StatdevisequipeComponent, StatdevisattenteComponent, ActivitecommercialeComponent, ClientsComponent, UserdetailsComponent, SantefamilleComponent, SanteavantageComponent, EmplacementComponent, PeriodeComponent, GestionmairieComponent, ArticleComponent, DetailComponent, RetourarticleComponent, PromotionComponent],
   imports: [
     CommonModule,
     ComptesRoutingModule,

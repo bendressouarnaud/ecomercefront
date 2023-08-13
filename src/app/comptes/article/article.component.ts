@@ -7,6 +7,7 @@ import { Beansousproduit } from 'src/app/mesbeans/beansousproduit';
 import * as moment from 'moment';
 import { Produits } from 'src/app/mesbeans/produits';
 import { Detail } from 'src/app/mesbeans/detail';
+import { Beanpromotion } from 'src/app/mesbeans/beanpromotion';
 
 declare const $: any;
 
@@ -42,6 +43,9 @@ export class ArticleComponent implements OnInit {
   getDataSous = false;
   nombrearticle = 0;
   actif: Number =0;
+  listeHisto: Beanpromotion[];
+  idprn = 0;
+
 
 
   // M e t h o d s :
@@ -51,6 +55,7 @@ export class ArticleComponent implements OnInit {
     this.getcompanyarticles();
     //this.getsousproduitlib();
     this.getproduitlib();
+    this.getwebcompanypromotion();
   }
 
 
@@ -115,6 +120,21 @@ export class ArticleComponent implements OnInit {
             this.alreadyInit = true;
           }
 
+        }
+      )
+  }
+
+
+  //
+  getwebcompanypromotion(): void {
+    this.meswebservices.getwebcompanypromotion().toPromise()
+      .then(
+        resultat => {
+          // Succes
+          if (resultat.length > 0) {
+            this.listeHisto = resultat;
+            this.idprn = 0;
+          }
         }
       )
   }
