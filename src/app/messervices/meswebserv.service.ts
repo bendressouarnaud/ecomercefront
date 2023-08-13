@@ -116,6 +116,8 @@ import { Article } from "../mesbeans/article";
 import { Sousproduit } from "../mesbeans/sousproduit";
 import { Beandetail } from "../mesbeans/beandetail";
 import { Detail } from "../mesbeans/detail";
+import { BeanDetailModalite } from "../mesbeans/beandetailmodalite";
+import { Beanpromotion } from "../mesbeans/beanpromotion";
 
 @Injectable({
     providedIn: 'root'
@@ -401,6 +403,26 @@ export class MeswebservService {
     // Get Articles
     getcompanyarticles(): Observable<Article[]> {
         return this.httpclient.get<Article[]>(this.webserviceUri.concat("/getcompanyarticles"),
+            {});
+    }
+
+
+    // Get DETAILS for a particular COMPANY :
+    getwebdetailbycompany(): Observable<Detail[]> {
+        return this.httpclient.get<Detail[]>(this.webserviceUri.concat("/getwebdetailbycompany"),
+            {});
+    }
+
+    // Get DETAILS MODALITE for a particular COMPANY :
+    getwebdetailmodalitebycompany(): Observable<BeanDetailModalite[]> {
+        return this.httpclient.get<BeanDetailModalite[]>(this.webserviceUri.concat("/getwebdetailmodalitebycompany"),
+            {});
+    }
+
+
+    // Get PROMOTION for a particular COMPANY :
+    getwebcompanypromotion(): Observable<Beanpromotion[]> {
+        return this.httpclient.get<Beanpromotion[]>(this.webserviceUri.concat("/getwebcompanypromotion"),
             {});
     }
 
@@ -952,6 +974,16 @@ export class MeswebservService {
     // Save Article:
     enregistrerArticle(donnees: FormData): Observable<Reponse> {
         return this.httpclient.post<Reponse>(this.webserviceUri.concat("/savearticles"), donnees, {});
+    }
+
+    // Save MODALITE:
+    enregistrerModalite(donnees: FormData): Observable<Reponse> {
+        return this.httpclient.post<Reponse>(this.webserviceUri.concat("/savemodalites"), donnees, {});
+    }
+
+    // Save MODALITE:
+    enregistrerPromotion(donnees: FormData): Observable<Reponse> {
+        return this.httpclient.post<Reponse>(this.webserviceUri.concat("/savepromotion"), donnees, {});
     }
 
     // Save Emplacement:
