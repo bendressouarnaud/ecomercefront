@@ -1,6 +1,6 @@
 export class Beanpromotion{
-    idprn : Number;
-    reduction : Number;
+    idprn : number;
+    reduction : number;
     libelle : string;
     datedebut : string; 
     datefin : string; 

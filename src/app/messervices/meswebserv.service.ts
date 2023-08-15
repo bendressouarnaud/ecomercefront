@@ -427,6 +427,11 @@ export class MeswebservService {
     }
 
 
+    // Get promotion elated to an ARTICLE :
+    getarticlepromotion(donnees: FormData): Observable<Beanpromotion[]> {
+        return this.httpclient.post<Beanpromotion[]>(this.webserviceUri.concat("/getarticlepromotion"), donnees, {});
+    }
+
     // Get historique detail table 
     getAllHistoriqueDetailTable(): Observable<DetailNomenclature[]> {
         return this.httpclient.get<DetailNomenclature[]>(this.webserviceUri.concat("/gethistoriquenomenclature"),
@@ -974,6 +979,11 @@ export class MeswebservService {
     // Save Article:
     enregistrerArticle(donnees: FormData): Observable<Reponse> {
         return this.httpclient.post<Reponse>(this.webserviceUri.concat("/savearticles"), donnees, {});
+    }
+
+    // Save Article & Promotion:
+    enregistrerArticleAndPromotion(donnees: FormData): Observable<Reponse> {
+        return this.httpclient.post<Reponse>(this.webserviceUri.concat("/savearticleandpromotion"), donnees, {});
     }
 
     // Save MODALITE:

@@ -22,12 +22,14 @@ export class ArticleComponent implements OnInit {
   liste: Article[];
   listesousproduit: Beansousproduit[];
   tamponSousProduit: Beansousproduit[];
+  listeBeanpromotion: Beanpromotion[];
   listeproduit: Produits[];
 
   listedetail: Detail[];
   tamponDetail: Detail[];
 
   getData: boolean = false;
+  getDataHisto: boolean = false;
   basicDatepicker = "";
   publication = new Date();
   id = "0";
@@ -45,6 +47,8 @@ export class ArticleComponent implements OnInit {
   actif: Number =0;
   listeHisto: Beanpromotion[];
   idprn = 0;
+  //
+  flagDetail = false;
 
 
 
@@ -84,7 +88,25 @@ export class ArticleComponent implements OnInit {
         }
       }
     );
-    $('#modalupdate').modal();
+
+    this.formData = new FormData();
+    this.formData.append("id", idart.toString());
+    this.getDataHisto = false;
+
+    // Look for all promotion this article has been linked to :
+    this.meswebservices.getarticlepromotion(this.formData).toPromise()
+      .then(
+        resultat => {
+          // Succes
+          if (resultat.length > 0) {
+            this.listeBeanpromotion = resultat;
+            this.getDataHisto = true;
+          }
+                  
+        }
+      );
+
+      $('#modalupdate').modal();
   }
 
   /* Get All Activities */
@@ -133,14 +155,13 @@ export class ArticleComponent implements OnInit {
           // Succes
           if (resultat.length > 0) {
             this.listeHisto = resultat;
-            this.idprn = 0;
+            this.idprn = resultat[0].idprn;
           }
         }
       )
   }
 
 
-  // Save 
   // Save 
   enregistrer(): void {
     this.formData.append("id", this.id);
@@ -153,6 +174,24 @@ export class ArticleComponent implements OnInit {
     this.formData.append("detail", this.detail);
     this.formData.append("iddet", this.iddet.toString());
     this.meswebservices.enregistrerArticle(this.formData).toPromise().then(
+      resultat => {
+        if (resultat.element == "OK") {
+          location.reload();
+        }
+        else{
+          alert("Erreur de traitement !");
+        }
+      }
+    )
+  }
+
+
+  // Save 
+  enregistrerPromotion(): void {
+    this.formData.append("id", this.id);
+    this.formData.append("actif", this.actif.toString());
+    this.formData.append("idprn", this.idprn.toString());
+    this.meswebservices.enregistrerArticleAndPromotion(this.formData).toPromise().then(
       resultat => {
         if (resultat.element == "OK") {
           location.reload();
@@ -253,7 +292,13 @@ export class ArticleComponent implements OnInit {
       // Try to refresh :
       this.listesousproduit = tp;
       this.idspr = tp[0].idspr;
+
+      // Call this :
+      if(this.flagDetail) this.onSousProduitChange();
     }
+
+    // Set FLAG :
+    this.flagDetail = true;
   }
 
 
