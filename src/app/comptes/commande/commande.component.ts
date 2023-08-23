@@ -18,12 +18,13 @@ export class CommandeComponent implements OnInit {
   listeAttente: BeanOngoingCommande[];
   listeArticle: BeanArticleCommande[];
   getListeAttente = false;
+  getCommande = false;
 
 
   // Methods :
   constructor(private meswebservices: MeswebservService, private fb: FormBuilder) {
     this.articlesForm = this.fb.group({
-      articles: this.fb.array([]),
+      articles: this.fb.array([this.initRows()]),
     });
   }
 
@@ -75,24 +76,25 @@ export class CommandeComponent implements OnInit {
         resultat => {
 
           // Succes
-          this.listeArticle = resultat;        
+          this.listeArticle = resultat;  
+          
+          this.articlesForm = this.fb.group({
+            articles: this.fb.array([]),
+          });
 
           // Browse this :
           resultat.forEach(
             d => {
-              this.articlesArray.push(this.newArticle(d));
-              this.articlesForm.patchValue(
-                {
-                  data: this.articlesArray
-                }
-              )
+              this.articlesArray.push(this.newArticle(d));              
             }
           );
+          
 
+          /*this.articlesArray.push(this.initRows());
+          this.articlesArray.push(this.initRows());
+          this.articlesArray.push(this.initRows());*/
 
-
-          //alert("Taille : "+this.articlesArray.get('article)
-
+          this.getCommande = true;
           // Display 'MODAL' :
           $('#modalupdate').modal();
 
@@ -103,24 +105,40 @@ export class CommandeComponent implements OnInit {
 
 
   get articlesArray() {
-    return <FormArray>this.articlesForm.get('articles');
+    return this.articlesForm.get('articles') as FormArray;
+  }
+
+  initRows() {
+    return this.fb.group({
+      lien: [''],
+      libelle: [''],
+      prix: [''],
+      disponibilite: [''],
+      total: [''],
+      approuve: [12],
+    });
   }
 
   // ARTICLE linked to COMMANDE
-  newArticle(data : BeanArticleCommande): FormGroup {
+  newArticle(data : BeanArticleCommande) {
     return this.fb.group({
-      lien: data.lien,
-      libelle: data.libelle,
-      prix: data.prix,
-      disponibilite: data.disponibilite,
-      total: data.total,
-      approuve: 0
-    })
+      lien: [data.lien],
+      libelle: [data.libelle],
+      prix: [data.prix],
+      disponibilite: [data.disponibilite],
+      total: [data.total],
+      approuve: [0],
+    });
   }
 
   // Add DYNAMICALLY :
   /*addSkills() {
     this.articlesArray.push(this.newArticle());
   }*/
+
+  validerCommande(){
+    // Browse :
+    alert("Test : "+this.articlesArray.get('articles')[1].lien);
+  }
 
 }
