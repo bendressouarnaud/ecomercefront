@@ -118,6 +118,8 @@ import { Beandetail } from "../mesbeans/beandetail";
 import { Detail } from "../mesbeans/detail";
 import { BeanDetailModalite } from "../mesbeans/beandetailmodalite";
 import { Beanpromotion } from "../mesbeans/beanpromotion";
+import { BeanOngoingCommande } from "../mesbeans/beancommande";
+import { BeanArticleCommande } from "../mesbeans/beanarticlecommande";
 
 @Injectable({
     providedIn: 'root'
@@ -282,6 +284,8 @@ export class MeswebservService {
         return this.httpclient.get<Activite[]>(this.webserviceUri.concat("/getAllActivities"),
             {});
     }
+
+
 
 
     // Activities -- Accident
@@ -2796,5 +2800,15 @@ export class MeswebservService {
             });
     }
 
+    // Get ONGOING COMMANDE
+    getongoingcommande(): Observable<BeanOngoingCommande[]> {
+        return this.httpclient.get<BeanOngoingCommande[]>(this.webserviceUri.concat("/getongoingcommande"),
+            {});
+    }
+
+    // Get All ARTICLEs from one COMMANDE :
+    getongoingarticlesfromcommande(donnees: FormData): Observable<BeanArticleCommande[]> {
+        return this.httpclient.post<BeanArticleCommande[]>(this.webserviceUri.concat("/getongoingarticlesfromcommande"), donnees, {});
+    }
 
 }

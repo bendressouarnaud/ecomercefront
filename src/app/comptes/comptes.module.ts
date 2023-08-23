@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ComptesRoutingModule } from './comptes-routing.module';
 import { GestioncompteComponent } from './gestioncompte/gestioncompte.component';
 import { MaterialModule } from '../app.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NouisliderModule } from 'ng2-nouislider';
 import { TagInputModule } from 'ngx-chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -45,10 +45,11 @@ import { ArticleComponent } from './article/article.component';
 import { DetailComponent } from './detail/detail.component';
 import { RetourarticleComponent } from './retourarticle/retourarticle.component';
 import { PromotionComponent } from './promotion/promotion.component';
+import { CommandeComponent } from './commande/commande.component';
 
 
 @NgModule({
-  declarations: [GestioncompteComponent, GestioncommerceComponent, GestionrapportComponent, AccueilsupComponent, ConfigactiviteComponent, RdvsupComponent, AgendasupComponent, ReunionComponent, PerformanceComponent, HistoriqueComponent, AddresseComponent, ConfigequipeComponent, ConfigmotifComponent, NomenclatureComponent, DetailnomenclatureComponent, ParametresComponent, DevisComponent, StatdevisequipeComponent, StatdevisattenteComponent, ActivitecommercialeComponent, ClientsComponent, UserdetailsComponent, SantefamilleComponent, SanteavantageComponent, EmplacementComponent, PeriodeComponent, GestionmairieComponent, ArticleComponent, DetailComponent, RetourarticleComponent, PromotionComponent],
+  declarations: [GestioncompteComponent, GestioncommerceComponent, GestionrapportComponent, AccueilsupComponent, ConfigactiviteComponent, RdvsupComponent, AgendasupComponent, ReunionComponent, PerformanceComponent, HistoriqueComponent, AddresseComponent, ConfigequipeComponent, ConfigmotifComponent, NomenclatureComponent, DetailnomenclatureComponent, ParametresComponent, DevisComponent, StatdevisequipeComponent, StatdevisattenteComponent, ActivitecommercialeComponent, ClientsComponent, UserdetailsComponent, SantefamilleComponent, SanteavantageComponent, EmplacementComponent, PeriodeComponent, GestionmairieComponent, ArticleComponent, DetailComponent, RetourarticleComponent, PromotionComponent, CommandeComponent],
   imports: [
     CommonModule,
     ComptesRoutingModule,

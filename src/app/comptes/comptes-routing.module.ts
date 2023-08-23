@@ -30,6 +30,7 @@ import { GestionmairieComponent } from './gestionmairie/gestionmairie.component'
 import { ArticleComponent } from './article/article.component';
 import { RetourarticleComponent } from './retourarticle/retourarticle.component';
 import { PromotionComponent } from './promotion/promotion.component';
+import { CommandeComponent } from './commande/commande.component';
 
 const routes: Routes = [
   {
@@ -146,6 +147,10 @@ const routes: Routes = [
   {
     path:'promotion',
     component: PromotionComponent
+  },
+  {
+    path:'commande',
+    component: CommandeComponent
   }
 ];
 
