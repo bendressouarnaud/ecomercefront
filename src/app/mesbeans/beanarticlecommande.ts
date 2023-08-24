@@ -4,6 +4,7 @@ export class BeanArticleCommande{
     prix : number;
     disponibilite : number;
     total : number;
+    idcde : number;
 
     // Methd :
     constructor(){}

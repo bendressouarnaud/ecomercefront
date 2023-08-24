@@ -120,6 +120,7 @@ import { BeanDetailModalite } from "../mesbeans/beandetailmodalite";
 import { Beanpromotion } from "../mesbeans/beanpromotion";
 import { BeanOngoingCommande } from "../mesbeans/beancommande";
 import { BeanArticleCommande } from "../mesbeans/beanarticlecommande";
+import { Beanapprobation } from "../mesbeans/beanapprobation";
 
 @Injectable({
     providedIn: 'root'
@@ -2801,14 +2802,19 @@ export class MeswebservService {
     }
 
     // Get ONGOING COMMANDE
-    getongoingcommande(): Observable<BeanOngoingCommande[]> {
-        return this.httpclient.get<BeanOngoingCommande[]>(this.webserviceUri.concat("/getongoingcommande"),
-            {});
+    getongoingcommande(fdt: FormData): Observable<BeanOngoingCommande[]> {
+        return this.httpclient.post<BeanOngoingCommande[]>(this.webserviceUri.concat("/getongoingcommande"), fdt, {});
     }
 
     // Get All ARTICLEs from one COMMANDE :
     getongoingarticlesfromcommande(donnees: FormData): Observable<BeanArticleCommande[]> {
         return this.httpclient.post<BeanArticleCommande[]>(this.webserviceUri.concat("/getongoingarticlesfromcommande"), donnees, {});
+    }
+
+    // Send ARTICLE BOOKED :
+    validatecommande(objet: Beanapprobation[]): Observable<Reponse> {
+        // 
+        return this.httpclient.post<Reponse>(this.webserviceUri.concat("/validatecommande"), objet, {});
     }
 
 }
