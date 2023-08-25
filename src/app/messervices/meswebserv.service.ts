@@ -2811,6 +2811,11 @@ export class MeswebservService {
         return this.httpclient.post<BeanArticleCommande[]>(this.webserviceUri.concat("/getongoingarticlesfromcommande"), donnees, {});
     }
 
+    // Get All ARTICLEs from one COMMANDE :
+    getvalidatedarticlesfromcommande(donnees: FormData): Observable<BeanArticleCommande[]> {
+        return this.httpclient.post<BeanArticleCommande[]>(this.webserviceUri.concat("/getvalidatedarticlesfromcommande"), donnees, {});
+    }
+
     // Send ARTICLE BOOKED :
     validatecommande(objet: Beanapprobation[]): Observable<Reponse> {
         // 

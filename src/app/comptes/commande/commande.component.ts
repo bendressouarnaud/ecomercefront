@@ -22,6 +22,7 @@ export class CommandeComponent implements OnInit {
   getListeAttente = false;
   getListeTraite = false;
   getCommande = false;
+  coutTotal = 0;
 
 
   // Methods :
@@ -118,7 +119,6 @@ export class CommandeComponent implements OnInit {
     this.meswebservices.getongoingarticlesfromcommande(formData).toPromise()
       .then(
         resultat => {
-
           // Succes
           this.listeArticle = resultat;  
           
@@ -136,9 +136,7 @@ export class CommandeComponent implements OnInit {
           this.getCommande = true;
           // Display 'MODAL' :
           $('#modalupdate').modal();
-
         }
-
       )
   }
 
@@ -200,5 +198,40 @@ export class CommandeComponent implements OnInit {
         }
       )
   }
+
+
+    // Display 'COMMANDE' :
+    afficherArticleCommandeValide(dates: string, heure: string, idcli: number): void {
+      let formData = new FormData();
+      formData.append("dates", dates);
+      formData.append("heure", heure);
+      formData.append("idcli", idcli.toString());
+      this.meswebservices.getvalidatedarticlesfromcommande(formData).toPromise()
+        .then(
+          resultat => {
+            // Succes
+            this.listeArticle = resultat;  
+
+            if(resultat.length > 0){
+              this.articlesForm = this.fb.group({
+                articles: this.fb.array([]),
+              });
+    
+              // Browse this :
+              this.coutTotal = 0;
+              resultat.forEach(
+                d => {
+                  this.articlesArray.push(this.newArticle(d));   
+                  this.coutTotal += (d.disponibilite * d.prix);           
+                }
+              );
+    
+              this.getCommande = true;
+              // Display 'MODAL' :
+              $('#modalupdate').modal();
+            }                        
+          }
+        )
+    }
 
 }
