@@ -23,6 +23,13 @@ export class CommandeComponent implements OnInit {
   getListeTraite = false;
   getCommande = false;
   coutTotal = 0;
+  //------
+  dates: string;
+  heure: string;
+  idcli: number;
+  titreAction = "";
+  flagAction = 0;
+
 
 
   // Methods :
@@ -47,7 +54,7 @@ export class CommandeComponent implements OnInit {
 
           // Succes
           if (resultat.length > 0) {
-            this.listeAttente = resultat;            
+            this.listeAttente = resultat;
           }
 
           //
@@ -83,7 +90,7 @@ export class CommandeComponent implements OnInit {
 
           // Succes
           if (resultat.length > 0) {
-            this.listeTraite = resultat;            
+            this.listeTraite = resultat;
           }
 
           //
@@ -120,8 +127,8 @@ export class CommandeComponent implements OnInit {
       .then(
         resultat => {
           // Succes
-          this.listeArticle = resultat;  
-          
+          this.listeArticle = resultat;
+
           this.articlesForm = this.fb.group({
             articles: this.fb.array([]),
           });
@@ -129,7 +136,7 @@ export class CommandeComponent implements OnInit {
           // Browse this :
           resultat.forEach(
             d => {
-              this.articlesArray.push(this.newArticle(d));              
+              this.articlesArray.push(this.newArticle(d));
             }
           );
 
@@ -158,7 +165,7 @@ export class CommandeComponent implements OnInit {
   }
 
   // ARTICLE linked to COMMANDE
-  newArticle(data : BeanArticleCommande) {
+  newArticle(data: BeanArticleCommande) {
     return this.fb.group({
       lien: [data.lien],
       libelle: [data.libelle],
@@ -175,16 +182,16 @@ export class CommandeComponent implements OnInit {
     this.articlesArray.push(this.newArticle());
   }*/
 
-  validerCommande(){
+  validerCommande() {
     // Browse :
     let data = Array() as Beanapprobation[];
-    Object.keys(this.articlesArray.controls).forEach(key => { 
+    Object.keys(this.articlesArray.controls).forEach(key => {
       let tp = new Beanapprobation();
       tp.approbation = this.articlesArray.get(key).value['approuve'];
       tp.idcde = this.articlesArray.get(key).value['idcde'];
       data.push(tp);
     });
-    
+
     // Now send this OBJECT :
     this.meswebservices.validatecommande(data).toPromise()
       .then(
@@ -192,7 +199,7 @@ export class CommandeComponent implements OnInit {
           if (resultat.element == "OK") {
             location.reload();
           }
-          else{
+          else {
             alert("Erreur de traitement !");
           }
         }
@@ -200,38 +207,98 @@ export class CommandeComponent implements OnInit {
   }
 
 
-    // Display 'COMMANDE' :
-    afficherArticleCommandeValide(dates: string, heure: string, idcli: number): void {
-      let formData = new FormData();
-      formData.append("dates", dates);
-      formData.append("heure", heure);
-      formData.append("idcli", idcli.toString());
-      this.meswebservices.getvalidatedarticlesfromcommande(formData).toPromise()
-        .then(
-          resultat => {
-            // Succes
-            this.listeArticle = resultat;  
+  // Display 'COMMANDE' :
+  afficherArticleCommandeValide(dates: string, heure: string, idcli: number): void {
+    let formData = new FormData();
+    formData.append("dates", dates);
+    formData.append("heure", heure);
+    formData.append("idcli", idcli.toString());
+    this.meswebservices.getvalidatedarticlesfromcommande(formData).toPromise()
+      .then(
+        resultat => {
+          // Succes
+          this.listeArticle = resultat;
 
-            if(resultat.length > 0){
-              this.articlesForm = this.fb.group({
-                articles: this.fb.array([]),
-              });
-    
-              // Browse this :
-              this.coutTotal = 0;
-              resultat.forEach(
-                d => {
-                  this.articlesArray.push(this.newArticle(d));   
-                  this.coutTotal += (d.disponibilite * d.prix);           
-                }
-              );
-    
-              this.getCommande = true;
-              // Display 'MODAL' :
-              $('#modalupdate').modal();
-            }                        
+          if (resultat.length > 0) {
+            this.articlesForm = this.fb.group({
+              articles: this.fb.array([]),
+            });
+
+            // Browse this :
+            this.coutTotal = 0;
+            resultat.forEach(
+              d => {
+                this.articlesArray.push(this.newArticle(d));
+                this.coutTotal += (d.disponibilite * d.prix);
+              }
+            );
+
+            this.getCommande = true;
+            // Display 'MODAL' :
+            $('#modalupdate').modal();
           }
-        )
-    }
+        }
+      )
+  }
+
+
+  // EMISSION COLIS :
+  emissioncolis(dates: string, heure: string, idcli: number): void {
+    this.dates = dates;
+    this.heure = heure;
+    this.idcli = idcli;
+    this.titreAction = "Confirmer l'envoi de la commande";
+    this.flagAction = 0;
+    $('#modalAction').modal();
+  }
+
+
+  // COLIS LIVRE :
+  colislivre(dates: string, heure: string, idcli: number): void {
+    this.dates = dates;
+    this.heure = heure;
+    this.idcli = idcli;
+    this.titreAction = "Confirmer la réception de la commande par le client";
+    this.flagAction = 1;
+    $('#modalAction').modal();
+  }
+
+
+  // Transmettre le COLIS :
+  transmettreCommande(){
+    let formData = new FormData();
+    formData.append("dates", this.dates);
+    formData.append("heure", this.heure);
+    formData.append("idcli", this.idcli.toString());
+
+    this.meswebservices.emissioncolis(formData).toPromise()
+      .then(
+        resultat => {
+          // Succes
+          if (resultat.element == "OK") {
+            location.reload();
+          }
+        }
+      );
+  }
+
+
+  // Confirmer la réception de la COMMANDE par le CLIENT :
+  signalerlivraisonCommande(){
+    let formData = new FormData();
+    formData.append("dates", this.dates);
+    formData.append("heure", this.heure);
+    formData.append("idcli", this.idcli.toString());
+
+    this.meswebservices.livraisonCommande(formData).toPromise()
+      .then(
+        resultat => {
+          // Succes
+          if (resultat.element == "OK") {
+            location.reload();
+          }
+        }
+      );
+  }
 
 }

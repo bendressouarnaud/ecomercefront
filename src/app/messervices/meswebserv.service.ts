@@ -2816,6 +2816,16 @@ export class MeswebservService {
         return this.httpclient.post<BeanArticleCommande[]>(this.webserviceUri.concat("/getvalidatedarticlesfromcommande"), donnees, {});
     }
 
+    // Signaler l'EMISSION DU COLIS :
+    emissioncolis(donnees: FormData): Observable<Reponse> {
+        return this.httpclient.post<Reponse>(this.webserviceUri.concat("/emissioncolis"), donnees, {});
+    }
+
+    // Confirmer la livraison de la COMMMANDE :
+    livraisonCommande(donnees: FormData): Observable<Reponse> {
+        return this.httpclient.post<Reponse>(this.webserviceUri.concat("/livraisonCommande"), donnees, {});
+    }
+
     // Send ARTICLE BOOKED :
     validatecommande(objet: Beanapprobation[]): Observable<Reponse> {
         // 

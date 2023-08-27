@@ -1,6 +1,35 @@
 <div class="main-content" style=" margin-top: 0px;">
     <div class="container-fluid" style=" margin-top: 0px; padding-top: 0px;">
 
+        <div class="modal fade" id="modalAction" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">{{ titreAction }}</h4>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div style="text-align: center; width: 100%; color:black; font-weight: bold;"
+                                id="infosrequest">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button *ngIf="this.flagAction==0" mat-raised-button type="button" (click)="transmettreCommande()"
+                            class="btn btn-success">Confirmer</button>
+                        <button *ngIf="this.flagAction==1" mat-raised-button type="button" (click)="signalerlivraisonCommande()"
+                            class="btn btn-warning">Confirmer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Update ARTICLE's number and CHOIX                 -->
         <div class="modal fade" id="modalupdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
             aria-hidden="true">
@@ -231,6 +260,19 @@
                                                                     (click)="afficherArticleCommandeValide( dt.dates, dt.heure, dt.idcli )"
                                                                     class="btn btn-link btn-info btn-just-icon edit"><i
                                                                         class="material-icons">monetization_on</i></a>
+
+                                                                <!--  EMISSION COLIS  -->        
+                                                                <a title="Signaler l'&eacute;mission du colis"
+                                                                    (click)="emissioncolis( dt.dates, dt.heure, dt.idcli )"
+                                                                    class="btn btn-link btn-warning btn-just-icon edit" *ngIf="dt.emission==0"><i
+                                                                        class="material-icons">nat</i></a>
+
+                                                                <!--  COLIS LIVRé  -->        
+                                                                <a title="Signaler la livraison du colis"
+                                                                    (click)="colislivre( dt.dates, dt.heure, dt.idcli )"
+                                                                    class="btn btn-link btn-success btn-just-icon edit" *ngIf="dt.livre==0"><i
+                                                                        class="material-icons">task_alt</i></a>
+
                                                             </td>
                                                         </tr>
                                                     </tbody>

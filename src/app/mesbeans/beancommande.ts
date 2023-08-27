@@ -6,6 +6,8 @@ export class BeanOngoingCommande{
     numero : String;
     idcli : number;
     total : number;
+    emission : number;
+    livre : number;
 
     // Methd :
     constructor(){}
