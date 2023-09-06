@@ -317,13 +317,12 @@ export const routesAdministarteur: RouteInfo[] = [
         icontype: 'apps',
         collapse: 'gestion',
         children: [
-            { path: 'comptes', title: 'Comptes utilisateurs', ab: 'CU' },
-            { path: 'superficie', title: 'Superficie', ab: 'SE' },
-            { path: 'emplacement', title: 'Emplacement', ab: 'ET' },
-            { path: 'periode', title: 'Période', ab: 'PE' },
-            { path: 'nomenclature', title: 'Nomenclature', ab: 'NE' },
-            { path: 'detailnomenclature', title: 'Détail', ab: 'DE' },
-            { path: 'parametre', title: 'Paramètres', ab: 'PS' }
+            { path: 'article', title: 'Articles', ab: 'SE' },
+            { path: 'comptes', title: 'Comptes utilisateurs', ab: 'CU' },            
+            { path: 'delairetour', title: 'Modalité', ab: 'ET' },
+            { path: 'promotion', title: 'Promotion', ab: 'PE' },
+            { path: 'commande', title: 'Commande', ab: 'NE' },
+            { path: 'statistiques', title: 'Statistiques', ab: 'DE' }
         ]
     }
 ];
@@ -468,6 +467,7 @@ export class SidebarComponent implements OnInit {
                 break;
 
             case "admin":
+            case "adm":
                 this.menuItems = routesAdministarteur.filter(menuItem => menuItem);
                 break;
 
