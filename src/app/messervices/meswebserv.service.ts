@@ -121,6 +121,7 @@ import { Beanpromotion } from "../mesbeans/beanpromotion";
 import { BeanOngoingCommande } from "../mesbeans/beancommande";
 import { BeanArticleCommande } from "../mesbeans/beanarticlecommande";
 import { Beanapprobation } from "../mesbeans/beanapprobation";
+import { BeanArticleUpdate } from "../mesbeans/beanarticleupdate";
 
 @Injectable({
     providedIn: 'root'
@@ -433,8 +434,8 @@ export class MeswebservService {
 
 
     // Get promotion elated to an ARTICLE :
-    getarticlepromotion(donnees: FormData): Observable<Beanpromotion[]> {
-        return this.httpclient.post<Beanpromotion[]>(this.webserviceUri.concat("/getarticlepromotion"), donnees, {});
+    getarticlepromotion(donnees: FormData): Observable<BeanArticleUpdate> {
+        return this.httpclient.post<BeanArticleUpdate>(this.webserviceUri.concat("/getarticlepromotion"), donnees, {});
     }
 
     // Get historique detail table 

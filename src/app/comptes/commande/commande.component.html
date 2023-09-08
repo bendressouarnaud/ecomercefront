@@ -158,12 +158,12 @@
                             </a>
                         </li>
 
-                        <li class="nav-item">
+                        <!--<li class="nav-item">
                             <a class="nav-link" href="#/gestion/parametre" role="tablist">
                                 <i class="material-icons"><img src="assets/img/parametrespng.png" width="85"
                                         height="70" /></i> Param&egrave;tres
                             </a>
-                        </li>
+                        </li>-->
                         
                     </ul>
                 </div>
@@ -270,7 +270,7 @@
                                                                 <!--  COLIS LIVRé  -->        
                                                                 <a title="Signaler la livraison du colis"
                                                                     (click)="colislivre( dt.dates, dt.heure, dt.idcli )"
-                                                                    class="btn btn-link btn-success btn-just-icon edit" *ngIf="dt.livre==0"><i
+                                                                    class="btn btn-link btn-success btn-just-icon edit" *ngIf="((dt.livre==0) && (dt.emission==1))"><i
                                                                         class="material-icons">task_alt</i></a>
 
                                                             </td>

@@ -40,6 +40,7 @@ export class ArticleComponent implements OnInit {
   libelle = "";
   detail = "";
   libfichier = "";
+  libmorefichier = "";
   alreadyInit = false;
   formData = new FormData();
   getDataSous = false;
@@ -74,6 +75,8 @@ export class ArticleComponent implements OnInit {
     this.libelle = "";
     this.id = "0";
     this.prix = "0";
+    // Reset this :
+    this.formData = new FormData();
     $('#myModal').modal();
   }
 
@@ -98,11 +101,10 @@ export class ArticleComponent implements OnInit {
       .then(
         resultat => {
           // Succes
-          if (resultat.length > 0) {
-            this.listeBeanpromotion = resultat;
-            this.getDataHisto = true;
-          }
-                  
+          this.listeBeanpromotion = resultat.promotion;
+          this.getDataHisto = true;
+          this.nombrearticle = resultat.quantite;
+          this.actif = resultat.actif;
         }
       );
 
@@ -191,6 +193,7 @@ export class ArticleComponent implements OnInit {
     this.formData.append("id", this.id);
     this.formData.append("actif", this.actif.toString());
     this.formData.append("idprn", this.idprn.toString());
+    this.formData.append("nombrearticle", this.nombrearticle.toString());
     this.meswebservices.enregistrerArticleAndPromotion(this.formData).toPromise().then(
       resultat => {
         if (resultat.element == "OK") {
@@ -341,14 +344,27 @@ export class ArticleComponent implements OnInit {
     }
   }
 
-
-
   onFileSelected(event) {
     const file: File = event.target.files[0];
     if (file) {
       if (this.formData.has("article")) this.formData.delete("article");
       this.formData.append("article", file);
       this.libfichier = file.name;
+    }
+    else {
+      if (this.formData.has("article")) {
+        this.formData.delete("article");
+      }
+    }
+  }
+
+  // More file :
+  onMoreFileSelected(event) {
+    const file: File = event.target.files[0];
+    if (file) {
+      if (this.formData.has("article")) this.formData.delete("article");
+      this.formData.append("article", file);
+      this.libmorefichier = file.name;
     }
     else {
       if (this.formData.has("article")) {
