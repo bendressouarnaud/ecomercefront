@@ -337,7 +337,10 @@ export const routesSuperAdministarteur: RouteInfo[] = [
         collapse: 'superadmin',
         children: [
             { path: 'accueil', title: 'Accueil', ab: 'CS' },
-            { path: 'mairie', title: 'Mairie', ab: 'ME' }
+            { path: 'mairie', title: 'Partenaire', ab: 'PE' },
+            { path: 'produit', title: 'Produit', ab: 'PT' },
+            { path: 'sousproduits', title: 'Sous-produit', ab: 'ST' },
+            { path: 'detailproduit', title: 'Détail', ab: 'ST' },
         ]
     }
 ];
@@ -472,6 +475,7 @@ export class SidebarComponent implements OnInit {
                 break;
 
             case "superadmin":
+            case "sup":
                 this.menuItems = routesSuperAdministarteur.filter(menuItem => menuItem);
                 break;
 
