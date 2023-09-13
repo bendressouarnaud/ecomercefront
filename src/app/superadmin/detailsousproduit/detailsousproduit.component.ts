@@ -30,6 +30,7 @@ export class DetailsousproduitComponent implements OnInit {
   formData = new FormData();
   idprd = 0;
   idspr = 0;
+  iddet = 0;
   /**** */
   tamponSousProduit: Sousproduit[];
 
@@ -45,6 +46,14 @@ export class DetailsousproduitComponent implements OnInit {
   ouvrirzonegestion(): void {
     // Open modal :
     this.libelle = "";
+    this.iddet = 0;
+    $('#myModal').modal();
+  }
+
+  afficher(iddet : number, libelle: string): void {
+    // Open modal :
+    this.libelle = libelle;
+    this.iddet = iddet;
     $('#myModal').modal();
   }
 
@@ -115,6 +124,7 @@ export class DetailsousproduitComponent implements OnInit {
   enregistrer(): void {
     this.formData.append("libelle", this.libelle);
     this.formData.append("idspr", this.idspr.toString());
+    this.formData.append("iddet", this.iddet.toString());
     this.meswebservices.enregistrerDetail(this.formData).toPromise().then(
       resultat => {
         if (resultat.element == "OK") {
