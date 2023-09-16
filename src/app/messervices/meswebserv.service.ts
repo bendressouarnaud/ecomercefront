@@ -131,9 +131,8 @@ import { BeanArticleUpdate } from "../mesbeans/beanarticleupdate";
 export class MeswebservService {
 
     /* Attributes */
-    private webserviceUri: String = "http://localhost:8080/backendcommerce";
-    //private webserviceUri: String = "https://ankkapp.com/backendmarche";
-    //private webserviceUri: String = "http://34.31.62.80/backendmarche";
+    //private webserviceUri: String = "http://localhost:8080/backendcommerce";
+    private webserviceUri: String = "https://ankkapp.com/backendcommerce";
     private mtoken = "";
 
     constructor(private httpclient: HttpClient) { }
@@ -151,6 +150,10 @@ export class MeswebservService {
 
     lookforAuthentication(userlog: UserLog): Observable<any> {
         return this.httpclient.post<any>(this.webserviceUri.concat("/authentification"), userlog, {});
+    }
+
+    suppraccount(userlog: UserLog): Observable<any> {
+        return this.httpclient.post<any>(this.webserviceUri.concat("/suppraccount"), userlog, {});
     }
 
     /* Reset User Password */

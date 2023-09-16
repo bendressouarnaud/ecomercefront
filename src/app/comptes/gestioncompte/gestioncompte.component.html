@@ -250,78 +250,6 @@
 
 
 
-
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-warning card-header-icon">
-                        <!--<div class="card-icon">
-                                <i class="material-icons">weekend</i>
-                            </div>-->
-                        <p class="card-category" style="color: black; font-weight: bold;">Commerciaux</p>
-                        <h3 class="card-title">{{ reponseReport.rdv }}</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons text-info">account_circle</i>Total commerciaux
-                            <!--<a href="#pablo">Get More Space...</a>-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-rose card-header-icon">
-                        <!--<div class="card-icon">
-                                <i class="material-icons">equalizer</i>
-                            </div>-->
-                        <p class="card-category" style="color: black; font-weight: bold;">Superviseurs</p>
-                        <h3 class="card-title">{{ reponseReport.commentaires }}</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons text-success">account_circle</i> Total commerciaux
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-success card-header-icon">
-                        <!--<div class="card-icon">
-                                <i class="material-icons">store</i>
-                            </div>-->
-                        <p class="card-category" style="color: black; font-weight: bold;">Comptes bloqu&eacute;s</p>
-                        <h3 class="card-title">{{ reponseReport.commerciaux }}</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons text-danger">account_circle</i> Comptes bloqu&eacute;s
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-info card-header-icon">
-                        <!--<div class="card-icon">
-                                <i class="fa fa-twitter"></i>
-                            </div>-->
-                        <p class="card-category" style="color: black; font-weight: bold;">Total comptes</p>
-                        <h3 class="card-title">{{ reponseReport.rapports }}</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">account_circle</i> Tous les comptes
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
         <!--  Add -->
         <div class="col-md-12">
 
@@ -359,6 +287,7 @@
 
                                         &nbsp;
 
+                                        <!--
                                         <a title="Consulter les donn&eacute;es du compte utilisateur"
                                             (click)="modifieruser(commerciaux.iduser)"
                                             class="btn btn-link btn-success btn-just-icon edit"><i
@@ -366,7 +295,7 @@
 
                                         &nbsp;
 
-                                        <!--<a title="Activer le compte" (click)="activationquestion(commerciaux.email)"
+                                        <a title="Activer le compte" (click)="activationquestion(commerciaux.email)"
                                             class="btn btn-link btn-info btn-just-icon edit"
                                             *ngIf="commerciaux.modes != '0'"><i class="material-icons">autorenew</i></a>
 

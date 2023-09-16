@@ -24,6 +24,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private passwordFlag = false;
     private actionEnCours = false;
     private emailaddress = "";
+    suppressioncompte = false;
+    authSuppr = 0;
 
 
 
@@ -78,192 +80,224 @@ export class LoginComponent implements OnInit, OnDestroy {
         body.classList.remove('off-canvas-sidebar');
     }
 
+    onCheckboxChange(e) {      
+        if (e.target.checked) {
+            this.authSuppr = 1;
+        } else {
+            this.authSuppr = 0;
+        }
+      }
+
     /* Try to authenticate the user */
     onAutentication(): void {
 
-        if (!this.actionEnCours) {
-
-            // Set it :
-            this.actionEnCours = true;
-
-            //
-            document.getElementById("infos").innerHTML = "Connexion ...";
+        if(this.authSuppr == 1){
             // Create our LOGIN obect :
-            var userlog = new UserLog();
-            userlog.identifiant = this.identifiant.trim();
-            userlog.motdepasse = this.motdepasse.trim();
-
-            if (!this.passwordFlag) {
-                this.meswebservices.lookforAuthentication(userlog).toPromise()
+            var userlogt = new UserLog();
+            userlogt.identifiant = this.identifiant.trim();
+            userlogt.motdepasse = this.motdepasse.trim();
+            // delete account : 
+            this.meswebservices.suppraccount(userlogt).toPromise()
                     .then(
                         resultat => {
-                            // Succes
-                            if (resultat.userexist == '1') {
-                                if (resultat.code == '200') {
-                                    if (resultat.paswordchange == '1') {
-                                        // Keep the TOKEN :
-                                        this.meswebservices.setToken(resultat.data);
-                                        // Move on :
-                                        localStorage.setItem("userid", this.identifiant.trim());
-                                        localStorage.setItem("profil", resultat.profil.toString());
-                                        localStorage.setItem("identifiant", resultat.identifiant.toString());
-                                        localStorage.setItem("mtoken", resultat.data);
-                                        switch (resultat.profil.toString()) {
-                                            case 'superviseur':
-                                                window.location.href = "#/superviseur/accueilman"; // 
-                                                break
+                            if (resultat.operation == '1') {
+                                alert('Le compte a été supprimé !');
+                                location.reload();
+                            }
+                            else alert('Erreur survenue !');
+                        }
+                    )
+                    .catch(
+                        reason => {
 
-                                            case 'adm':
-                                                // Administrateur
-                                                window.location.href = "#/gestion/comptes";
-                                                break;
+                        }
+                    );
+        }
+        else{
+            if (!this.actionEnCours) {
 
-                                            case "commercial":
-                                                window.location.href = "#/gcommercial/accueilcom";
-                                                break;
+                // Set it :
+                this.actionEnCours = true;
 
-                                            case "infas":
-                                                window.location.href = "#/infas/professeur";
-                                                break;
+                //
+                document.getElementById("infos").innerHTML = "Connexion ...";
+                // Create our LOGIN obect :
+                var userlog = new UserLog();
+                userlog.identifiant = this.identifiant.trim();
+                userlog.motdepasse = this.motdepasse.trim();
 
-                                            case "inspecteur":
-                                                window.location.href = "#/inspecteur/accueil";
-                                                break;
+                if (!this.passwordFlag) {
+                    this.meswebservices.lookforAuthentication(userlog).toPromise()
+                        .then(
+                            resultat => {
+                                // Succes
+                                if (resultat.userexist == '1') {
+                                    if (resultat.code == '200') {
+                                        if (resultat.paswordchange == '1') {
+                                            // Keep the TOKEN :
+                                            this.meswebservices.setToken(resultat.data);
+                                            // Move on :
+                                            localStorage.setItem("userid", this.identifiant.trim());
+                                            localStorage.setItem("profil", resultat.profil.toString());
+                                            localStorage.setItem("identifiant", resultat.identifiant.toString());
+                                            localStorage.setItem("mtoken", resultat.data);
+                                            switch (resultat.profil.toString()) {
+                                                case 'superviseur':
+                                                    window.location.href = "#/superviseur/accueilman"; // 
+                                                    break
 
-                                            case "respreseau":
-                                                window.location.href = "#/responsable/accueil";
-                                                break;
+                                                case 'adm':
+                                                    // Administrateur
+                                                    window.location.href = "#/gestion/comptes";
+                                                    break;
 
-                                            case "dircomadj":
-                                                window.location.href = "#/directeuragj/accueil";
-                                                break;
+                                                case "commercial":
+                                                    window.location.href = "#/gcommercial/accueilcom";
+                                                    break;
 
-                                            case "dircom":
-                                                window.location.href = "#/directeur/accueil";
-                                                break;
+                                                case "infas":
+                                                    window.location.href = "#/infas/professeur";
+                                                    break;
 
-                                            case "tresorier":
-                                                window.location.href = "#/tresorier/accueil";
-                                                break;
+                                                case "inspecteur":
+                                                    window.location.href = "#/inspecteur/accueil";
+                                                    break;
 
-                                            case "sup":
-                                                // superadmin
-                                                window.location.href = "#/superadmin/accueil";
-                                                break;
+                                                case "respreseau":
+                                                    window.location.href = "#/responsable/accueil";
+                                                    break;
 
-                                            default:
-                                                window.location.href = "/";
-                                                break;
+                                                case "dircomadj":
+                                                    window.location.href = "#/directeuragj/accueil";
+                                                    break;
+
+                                                case "dircom":
+                                                    window.location.href = "#/directeur/accueil";
+                                                    break;
+
+                                                case "tresorier":
+                                                    window.location.href = "#/tresorier/accueil";
+                                                    break;
+
+                                                case "sup":
+                                                    // superadmin
+                                                    window.location.href = "#/superadmin/accueil";
+                                                    break;
+
+                                                default:
+                                                    window.location.href = "/";
+                                                    break;
+                                            }
+                                        }
+                                        else {
+                                            document.getElementById("infos").innerHTML = "";
+                                            // Display BLOC to reset password :
+                                            $("#blocreset").show();
+                                            // Set FLAG :
+                                            this.passwordFlag = true;
+                                            this.actionEnCours = false;
+                                            document.getElementById("infos").innerHTML = "<span style='color:red'>Veuillez changer le mot de passe. " +
+                                                "Le mot de passe doit contenir au moins 1 lettre majuscule, 1 lette minuscule et 1 chiffre, 1 caract&egrave;re sp&eacute;cial" +
+                                                " parmi cette liste _ * + $ @ # ! ( ) [ ] { } -    et tenir sur au moins 8 caract&egrave;res !</span>";
                                         }
                                     }
                                     else {
                                         document.getElementById("infos").innerHTML = "";
-                                        // Display BLOC to reset password :
-                                        $("#blocreset").show();
-                                        // Set FLAG :
-                                        this.passwordFlag = true;
-                                        this.actionEnCours = false;
-                                        document.getElementById("infos").innerHTML = "<span style='color:red'>Veuillez changer le mot de passe. " +
-                                            "Le mot de passe doit contenir au moins 1 lettre majuscule, 1 lette minuscule et 1 chiffre, 1 caract&egrave;re sp&eacute;cial" +
-                                            " parmi cette liste _ * + $ @ # ! ( ) [ ] { } -    et tenir sur au moins 8 caract&egrave;res !</span>";
+                                        this.warnmessage("Impossible de d'authentifier l'utilisateur !");
                                     }
+                                }
+                                else if (resultat.userexist == '2') {
+                                    document.getElementById("infos").innerHTML = "";
+                                    this.warnmessage("Votre compte a été verrouillé suite à 3 tentatives infructueuses d'accès. " +
+                                        "Veuillez vous adresser à l'administrateur !");
                                 }
                                 else {
+                                    this.warnmessage("L'identifiant ou le mot de passe est incorrect !");
                                     document.getElementById("infos").innerHTML = "";
-                                    this.warnmessage("Impossible de d'authentifier l'utilisateur !");
                                 }
-                            }
-                            else if (resultat.userexist == '2') {
-                                document.getElementById("infos").innerHTML = "";
-                                this.warnmessage("Votre compte a été verrouillé suite à 3 tentatives infructueuses d'accès. " +
-                                    "Veuillez vous adresser à l'administrateur !");
-                            }
-                            else {
-                                this.warnmessage("L'identifiant ou le mot de passe est incorrect !");
-                                document.getElementById("infos").innerHTML = "";
-                            }
-                        },
-                        (error) => {
-                            document.getElementById("infos").innerHTML = "";
-                            this.warnmessage("Impossible de joindre le serveur !");
-                        }
-                    )
-            }
-            else {
-                // Request for PASSWORD CHANGE :
-                if (this.checkPassword()) {
-                    // Good, now process :
-                    var userloginchg = new UserLogChg();
-                    userloginchg.identifiant = this.identifiant.trim().toString();
-                    userloginchg.motdepasse = this.motdepasse.trim().toString();
-                    userloginchg.motdepassedeux = this.motdepassedeux.trim().toString();
-
-                    this.meswebservices.lookforPasswordReset(userloginchg).toPromise()
-                        .then(
-                            resultat => {
-                                // Succes
-                                if (resultat.actions == '1') {
-                                    if (resultat.code == '200') {
-
-                                        // Set the FLAG :
-                                        this.appService.setUserLoggedIn(true)
-
-                                        // Keep the TOKEN :
-                                        this.meswebservices.setToken(resultat.data);
-                                        // Move on :
-                                        localStorage.setItem("userid", this.identifiant.trim());
-                                        localStorage.setItem("profil", resultat.profil.toString());
-                                        localStorage.setItem("identifiant", resultat.identifiant.toString());
-                                        localStorage.setItem("mtoken", resultat.data);
-                                        switch (resultat.profil.toString()) {
-                                            case 'superviseur':
-                                                window.location.href = "#/gestion/accueilsup"; // 
-                                                break
-
-                                            case 'admin':
-                                                window.location.href = "#/gestion/comptes";
-                                                break;
-
-                                            case "commercial":
-                                                window.location.href = "#/gcommercial/accueilcom";
-                                                break;
-
-                                            case "infas":
-                                                window.location.href = "#/infas/professeur";
-                                                break;
-
-                                            case "inspecteur":
-                                                window.location.href = "#/inspecteur/accueil";
-                                                break;
-
-                                            case "respreseau":
-                                                window.location.href = "#/responsable/accueil";
-                                                break;
-
-                                            case "dircomadj":
-                                                window.location.href = "#/directeuragj/accueil";
-                                                break;
-
-                                            case "dircom":
-                                                window.location.href = "#/directeur/accueil";
-                                                break;
-
-                                            default:
-                                                window.location.href = "/";
-                                                break;
-                                        }
-                                    }
-                                    else this.warnmessage("Impossible de d'authentifier l'utilisateur !");
-                                }
-                                else this.warnmessage("L'identifiant ou le mot de passe est incorrect !");
                             },
                             (error) => {
+                                document.getElementById("infos").innerHTML = "";
                                 this.warnmessage("Impossible de joindre le serveur !");
                             }
                         )
                 }
-                else this.warnmessage("Le mot de passe doit contenir au moins 1 lettre majuscule, 1 lette minuscule et 1 chiffre et un"
-                    + " caractère spécial parmi cette liste _ * + $ @ # ! ( ) [ ] { } -");
+                else {
+                    // Request for PASSWORD CHANGE :
+                    if (this.checkPassword()) {
+                        // Good, now process :
+                        var userloginchg = new UserLogChg();
+                        userloginchg.identifiant = this.identifiant.trim().toString();
+                        userloginchg.motdepasse = this.motdepasse.trim().toString();
+                        userloginchg.motdepassedeux = this.motdepassedeux.trim().toString();
+
+                        this.meswebservices.lookforPasswordReset(userloginchg).toPromise()
+                            .then(
+                                resultat => {
+                                    // Succes
+                                    if (resultat.actions == '1') {
+                                        if (resultat.code == '200') {
+
+                                            // Set the FLAG :
+                                            this.appService.setUserLoggedIn(true)
+
+                                            // Keep the TOKEN :
+                                            this.meswebservices.setToken(resultat.data);
+                                            // Move on :
+                                            localStorage.setItem("userid", this.identifiant.trim());
+                                            localStorage.setItem("profil", resultat.profil.toString());
+                                            localStorage.setItem("identifiant", resultat.identifiant.toString());
+                                            localStorage.setItem("mtoken", resultat.data);
+                                            switch (resultat.profil.toString()) {
+                                                case 'superviseur':
+                                                    window.location.href = "#/gestion/accueilsup"; // 
+                                                    break
+
+                                                case 'admin':
+                                                    window.location.href = "#/gestion/comptes";
+                                                    break;
+
+                                                case "commercial":
+                                                    window.location.href = "#/gcommercial/accueilcom";
+                                                    break;
+
+                                                case "infas":
+                                                    window.location.href = "#/infas/professeur";
+                                                    break;
+
+                                                case "inspecteur":
+                                                    window.location.href = "#/inspecteur/accueil";
+                                                    break;
+
+                                                case "respreseau":
+                                                    window.location.href = "#/responsable/accueil";
+                                                    break;
+
+                                                case "dircomadj":
+                                                    window.location.href = "#/directeuragj/accueil";
+                                                    break;
+
+                                                case "dircom":
+                                                    window.location.href = "#/directeur/accueil";
+                                                    break;
+
+                                                default:
+                                                    window.location.href = "/";
+                                                    break;
+                                            }
+                                        }
+                                        else this.warnmessage("Impossible de d'authentifier l'utilisateur !");
+                                    }
+                                    else this.warnmessage("L'identifiant ou le mot de passe est incorrect !");
+                                },
+                                (error) => {
+                                    this.warnmessage("Impossible de joindre le serveur !");
+                                }
+                            )
+                    }
+                    else this.warnmessage("Le mot de passe doit contenir au moins 1 lettre majuscule, 1 lette minuscule et 1 chiffre et un"
+                        + " caractère spécial parmi cette liste _ * + $ @ # ! ( ) [ ] { } -");
+                }
             }
         }
     }
