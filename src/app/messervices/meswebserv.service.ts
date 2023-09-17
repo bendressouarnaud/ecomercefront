@@ -2093,6 +2093,12 @@ export class MeswebservService {
         return this.httpclient.get<Parametrage>(this.webserviceUri.concat("/getparametersweb"), {});
     }
 
+    // Get Parametres WEB :
+    lookforsystemparameter(): Observable<Reponse> {
+        // 
+        return this.httpclient.get<Reponse>(this.webserviceUri.concat("/lookforsystemparameter"), {});
+    }
+
     // Gerer les parametres WEB :
     managewebparameters(prix: string, tr1: string, tr2: string, tr3: string, tr4: string): Observable<Reponse> {
         // Now, set the parameters :
@@ -2834,6 +2840,17 @@ export class MeswebservService {
     validatecommande(objet: Beanapprobation[]): Observable<Reponse> {
         // 
         return this.httpclient.post<Reponse>(this.webserviceUri.concat("/validatecommande"), objet, {});
+    }
+
+    // Save the new user :
+    saveadminparams(mail: string): Observable<Reponse> {
+
+        let mesParams = new HttpParams();
+        mesParams = mesParams.append('mail', mail);
+        return this.httpclient.get<Reponse>(this.webserviceUri.concat("/saveadminparams"),
+            {
+                params: mesParams
+            });
     }
 
 }

@@ -5,6 +5,7 @@ import { MairieComponent } from './mairie/mairie.component';
 import { PoduitsComponent } from './poduits/poduits.component';
 import { SouspoduitsComponent } from './souspoduits/souspoduits.component';
 import { DetailsousproduitComponent } from './detailsousproduit/detailsousproduit.component';
+import { ParametresComponent } from './parametres/parametres.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path:'detailproduit',
     component: DetailsousproduitComponent
+  },
+  {
+    path:'parametre',
+    component: ParametresComponent
   }
 ];
 

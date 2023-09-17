@@ -16,10 +16,11 @@ import { MairieComponent } from './mairie/mairie.component';
 import { PoduitsComponent } from './poduits/poduits.component';
 import { SouspoduitsComponent } from './souspoduits/souspoduits.component';
 import { DetailsousproduitComponent } from './detailsousproduit/detailsousproduit.component';
+import { ParametresComponent } from './parametres/parametres.component';
 
 
 @NgModule({
-  declarations: [AccueilComponent, MairieComponent, PoduitsComponent, SouspoduitsComponent, DetailsousproduitComponent],
+  declarations: [AccueilComponent, MairieComponent, PoduitsComponent, SouspoduitsComponent, DetailsousproduitComponent, ParametresComponent],
   imports: [
     CommonModule,
     SuperadminRoutingModule,
