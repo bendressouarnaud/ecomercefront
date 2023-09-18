@@ -131,8 +131,8 @@ import { BeanArticleUpdate } from "../mesbeans/beanarticleupdate";
 export class MeswebservService {
 
     /* Attributes */
-    //private webserviceUri: String = "http://localhost:8080/backendcommerce";
-    private webserviceUri: String = "https://ankkapp.com/backendcommerce";
+    private webserviceUri: String = "http://localhost:8080/backendcommerce";
+    //private webserviceUri: String = "https://ankkapp.com/backendcommerce";
     private mtoken = "";
 
     constructor(private httpclient: HttpClient) { }

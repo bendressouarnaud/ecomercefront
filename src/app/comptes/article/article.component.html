@@ -50,6 +50,17 @@
                                     </div>
 
                                     <div class="row">
+                                        <div class="col-md-10">
+                                            <input type="checkbox" [value]="remplacerimage" (change)="onCheckboxChange($event)" />&nbsp;
+                                                <span style="color: black;">Remplacer l'image d'origine</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row"><br></div>
+
+
+                                    <div class="row">
+                                        
                                         <div class="col-md-5">
                                             <button type="button" mat-raised-button (click)="filemoreInput.click()"
                                                 class="btn btn-default">

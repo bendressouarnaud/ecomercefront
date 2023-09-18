@@ -50,6 +50,8 @@ export class ArticleComponent implements OnInit {
   idprn = 0;
   //
   flagDetail = false;
+  remplacerimage = false;
+  authSwap = 0;
 
 
 
@@ -370,6 +372,14 @@ export class ArticleComponent implements OnInit {
       if (this.formData.has("article")) {
         this.formData.delete("article");
       }
+    }
+  }
+
+  onCheckboxChange(e) {      
+    if (e.target.checked) {
+        this.authSwap = 1;
+    } else {
+        this.authSwap = 0;
     }
   }
 }
