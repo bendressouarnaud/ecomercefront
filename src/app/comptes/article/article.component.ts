@@ -196,7 +196,7 @@ export class ArticleComponent implements OnInit {
     this.formData.append("actif", this.actif.toString());
     this.formData.append("idprn", this.idprn.toString());
     this.formData.append("nombrearticle", this.nombrearticle.toString());
-    this.formData.append("authSwap", this.authSwap.toString());
+    this.formData.append("authSwap", this.authSwap.toString()); //
     this.meswebservices.enregistrerArticleAndPromotion(this.formData).toPromise().then(
       resultat => {
         if (resultat.element == "OK") {
