@@ -32,6 +32,7 @@ export class PoduitsComponent implements OnInit {
   alreadyInit = false;
   idt = 0;
   formData = new FormData();
+  idprd = 0;
 
   constructor(private meswebservices: MeswebservService) { }
 
@@ -59,6 +60,7 @@ export class PoduitsComponent implements OnInit {
     this.contact = "";
     this.email = "";
     this.id = "0";
+    this.idprd = 0;
     $('#myModal').modal();
   }
 
@@ -102,6 +104,7 @@ export class PoduitsComponent implements OnInit {
   // Save 
   enregistrer(): void {
     this.formData.append("libelle", this.libelle);
+    this.formData.append("idprd", this.idprd.toString());
     this.meswebservices.enregistrerProduit(this.formData).toPromise().then(
       resultat => {
         if (resultat.element == "OK") {
@@ -183,6 +186,13 @@ export class PoduitsComponent implements OnInit {
         alert("Error");
         // Handle any errors
       });
+  }
+
+  afficher(idprd : number, libelle: string): void {
+    // Open modal :
+    this.libelle = libelle;
+    this.idprd = idprd;
+    $('#myModal').modal();
   }
 
 }

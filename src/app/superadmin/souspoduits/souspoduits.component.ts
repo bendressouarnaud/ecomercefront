@@ -52,6 +52,7 @@ export class SouspoduitsComponent implements OnInit {
   ouvrirzonegestion(): void {
     // Open modal :
     this.libelle = "";
+    this.idspr = 0;
     $('#myModal').modal();
   }
 
@@ -188,5 +189,11 @@ export class SouspoduitsComponent implements OnInit {
       });
   }
 
+  afficher(idspr : number, libelle: string): void {
+    // Open modal :
+    this.libelle = libelle;
+    this.idspr = idspr;
+    $('#myModal').modal();
+  }
 }
 
