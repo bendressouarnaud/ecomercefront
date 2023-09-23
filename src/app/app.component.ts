@@ -78,7 +78,7 @@ export class AppComponent implements OnInit {
 
       // Set the FLAG :
       //this.router.navigate(['/']);
-      window.location.href = "/";
+      window.location.href = "/gouabo";
     });
 
 
