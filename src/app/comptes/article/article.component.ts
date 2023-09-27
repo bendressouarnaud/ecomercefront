@@ -34,10 +34,12 @@ export class ArticleComponent implements OnInit {
   publication = new Date();
   id = "0";
   prix = "0";
+  prixUdt = "0";
   idspr = 0;
   idprod = 0;
   iddet = 0;
   libelle = "";
+  libelleUpd = "";
   detail = "";
   libfichier = "";
   libmorefichier = "";
@@ -89,6 +91,8 @@ export class ArticleComponent implements OnInit {
         if(d.idart == idart){
           this.id = idart.toString();
           this.actif = d.choix;
+          this.libelleUpd = d.libelle;
+          this.prixUdt = d.prix.toString();
           return;
         }
       }
@@ -196,7 +200,9 @@ export class ArticleComponent implements OnInit {
     this.formData.append("actif", this.actif.toString());
     this.formData.append("idprn", this.idprn.toString());
     this.formData.append("nombrearticle", this.nombrearticle.toString());
-    this.formData.append("authSwap", this.authSwap.toString()); //
+    this.formData.append("authSwap", this.authSwap.toString()); 
+    this.formData.append("libelle", this.libelleUpd); 
+    this.formData.append("prix", this.prixUdt); 
     this.meswebservices.enregistrerArticleAndPromotion(this.formData).toPromise().then(
       resultat => {
         if (resultat.element == "OK") {

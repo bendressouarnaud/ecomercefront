@@ -22,7 +22,7 @@
                                         <div class="col-md-3">
                                             <mat-form-field class="example-full-width">
                                                 <input matInput [(ngModel)]="nombrearticle" name='nombrearticle'
-                                                    type="text" placeholder="Nombre d'article">
+                                                    type="text" placeholder="Nombre d'article" maxlength="3">
                                             </mat-form-field>
                                         </div>
 
@@ -50,7 +50,23 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-10">
+                                        <div class="col-md-7">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="libelleUpd" name='libelleUpd' type="text"
+                                                    placeholder="Libell&eacute;" maxlength="45">
+                                            </mat-form-field>
+                                        </div>     
+                                        
+                                        <div class="col-md-3">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="prixUdt" name='prixUdt'
+                                                    type="text" placeholder="Prix" maxlength="7">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                        
+                                    <div>
+                                        <div class="col-md-7">
                                             <input type="checkbox" [value]="remplacerimage" (change)="onCheckboxChange($event)" />&nbsp;
                                                 <span style="color: black;">Remplacer l'image d'origine</span>
                                         </div>
@@ -150,7 +166,7 @@
                                         <div class="col-md-7">
                                             <mat-form-field class="example-full-width">
                                                 <input matInput [(ngModel)]="libelle" name='libelle' type="text"
-                                                    placeholder="Libell&eacute;">
+                                                    placeholder="Libell&eacute;" maxlength="45">
                                             </mat-form-field>
                                         </div>
 
@@ -205,7 +221,7 @@
                                 <label class="col-sm-2 col-form-label">&nbsp;</label>
                                 <div class="col-md-3">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput [(ngModel)]="prix" name='prix' type="text" placeholder="Prix">
+                                        <input matInput [(ngModel)]="prix" name='prix' type="text" placeholder="Prix" maxlength="7">
                                     </mat-form-field>
                                 </div>
                             </div>
