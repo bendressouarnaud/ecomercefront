@@ -48,6 +48,7 @@ export class ArticleComponent implements OnInit {
   getDataSous = false;
   nombrearticle = 0;
   actif: Number =0;
+  taille: Number =0;
   listeHisto: Beanpromotion[];
   idprn = 0;
   //
@@ -111,6 +112,7 @@ export class ArticleComponent implements OnInit {
           this.getDataHisto = true;
           this.nombrearticle = resultat.quantite;
           this.actif = resultat.actif;
+          this.taille = resultat.taille;
         }
       );
 
@@ -202,6 +204,7 @@ export class ArticleComponent implements OnInit {
     this.formData.append("nombrearticle", this.nombrearticle.toString());
     this.formData.append("authSwap", this.authSwap.toString()); 
     this.formData.append("libelle", this.libelleUpd); 
+    this.formData.append("taille", this.taille.toString()); 
     this.formData.append("prix", this.prixUdt); 
     this.meswebservices.enregistrerArticleAndPromotion(this.formData).toPromise().then(
       resultat => {

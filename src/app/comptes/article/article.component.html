@@ -65,10 +65,20 @@
                                         </div>
                                     </div>
                                         
-                                    <div>
-                                        <div class="col-md-7">
+                                    <div class="row">
+                                        <div class="col-md-5">
                                             <input type="checkbox" [value]="remplacerimage" (change)="onCheckboxChange($event)" />&nbsp;
                                                 <span style="color: black;">Remplacer l'image d'origine</span>
+                                        </div>                                        
+
+                                        <div class="col-md-5">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Etirer l'affichage" [(value)]="taille" name="taille"
+                                                    style="background-color: #afe4a3;" id='taille'>
+                                                    <mat-option [value]="1">Oui</mat-option>
+                                                    <mat-option [value]="0">Non</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
                                         </div>
                                     </div>
 
