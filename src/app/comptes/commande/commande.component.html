@@ -205,19 +205,19 @@
                                                     *ngIf="this.getListeAttente">
                                                     <thead>
                                                         <tr>
-                                                            <th>Client</th>
-                                                            <th>Num&eacute;ro</th>
-                                                            <th>Date & Heure</th>
-                                                            <th>Commandes</th>
-                                                            <th class="disabled-sorting text-center">Actions</th>
+                                                            <th width="40%">Client</th>
+                                                            <th width="15%">Num&eacute;ro</th>
+                                                            <th width="15%">Date & Heure</th>
+                                                            <th width="20%" class="text-center">Commandes</th>
+                                                            <th class="disabled-sorting text-center" width="10%">Actions</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr *ngFor="let dt of listeAttente">
-                                                            <td>{{ dt.nom }} &nbsp; {{ dt.prenom }}</td>
-                                                            <td>{{ dt.numero }}</td>
+                                                            <td style="font-weight: bold;">{{ dt.nom }} &nbsp; {{ dt.prenom }}</td>
+                                                            <td style="font-weight: bold;">{{ dt.numero }}</td>
                                                             <td>{{ dt.dates }} &nbsp;&nbsp;/&nbsp;&nbsp;{{ dt.heure }}</td>
-                                                            <td>{{ dt.total }}</td>
+                                                            <td class="text-center" style="font-weight: bold;">{{ dt.total }}</td>
                                                             <td class="text-center">
                                                                 <a title="Valider les commandes"
                                                                     (click)="affichercommande( dt.dates, dt.heure, dt.idcli )"
@@ -242,19 +242,19 @@
                                                     *ngIf="this.getListeTraite">
                                                     <thead>
                                                         <tr>
-                                                            <th>Client</th>
-                                                            <th>Num&eacute;ro</th>
-                                                            <th>Date & Heure</th>
-                                                            <th>Commandes</th>
-                                                            <th class="disabled-sorting text-center">Actions</th>
+                                                            <th width="40%">Client</th>
+                                                            <th width="15%">Num&eacute;ro</th>
+                                                            <th width="15%">Date & Heure</th>
+                                                            <th width="20%" class="text-center">Commandes</th>
+                                                            <th class="disabled-sorting text-center" width="10%">Actions</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr *ngFor="let dt of listeTraite">
-                                                            <td>{{ dt.nom }} &nbsp; {{ dt.prenom }}</td>
-                                                            <td>{{ dt.numero }}</td>
+                                                            <td style="font-weight: bold;">{{ dt.nom }} &nbsp; {{ dt.prenom }}</td>
+                                                            <td style="font-weight: bold;">{{ dt.numero }}</td>
                                                             <td>{{ dt.dates }} &nbsp;&nbsp;/&nbsp;&nbsp;{{ dt.heure }}</td>
-                                                            <td>{{ dt.total }}</td>
+                                                            <td class="text-center" style="font-weight: bold;">{{ dt.total }}</td>
                                                             <td class="text-center">
                                                                 <a title="Afficher le co&ucirc;t global"
                                                                     (click)="afficherArticleCommandeValide( dt.dates, dt.heure, dt.idcli )"
