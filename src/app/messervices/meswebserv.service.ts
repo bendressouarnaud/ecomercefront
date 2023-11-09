@@ -122,6 +122,7 @@ import { BeanOngoingCommande } from "../mesbeans/beancommande";
 import { BeanArticleCommande } from "../mesbeans/beanarticlecommande";
 import { Beanapprobation } from "../mesbeans/beanapprobation";
 import { BeanArticleUpdate } from "../mesbeans/beanarticleupdate";
+import { Grossiste } from "../mesbeans/grossiste";
 
 @Injectable({
     providedIn: 'root'
@@ -131,8 +132,8 @@ import { BeanArticleUpdate } from "../mesbeans/beanarticleupdate";
 export class MeswebservService {
 
     /* Attributes */
-    //private webserviceUri: String = "http://localhost:8080/backendcommerce";
-    private webserviceUri: String = "https://ankkapp.com/backendcommerce";
+    private webserviceUri: String = "http://localhost:8080/backendcommerce";
+    //private webserviceUri: String = "https://ankkapp.com/backendcommerce";
     private mtoken = "";
 
     constructor(private httpclient: HttpClient) { }
@@ -325,9 +326,15 @@ export class MeswebservService {
             {});
     }
 
-    // Get mairie
+    // Get 
     getAllPartenaies(): Observable<Partenaire[]> {
         return this.httpclient.get<Partenaire[]>(this.webserviceUri.concat("/getAllPartenaies"),
+            {});
+    }
+
+    // Get 
+    getAllGrossiste(): Observable<Grossiste[]> {
+        return this.httpclient.get<Grossiste[]>(this.webserviceUri.concat("/getAllGrossiste"),
             {});
     }
 
@@ -964,6 +971,20 @@ export class MeswebservService {
         mesParams = mesParams.append('contact', contact);
         mesParams = mesParams.append('email', email);
         return this.httpclient.get<Reponse>(this.webserviceUri.concat("/enregistrerPartenaire"),
+            {
+                params: mesParams
+            });
+    }
+
+
+    // Save Grossiste:
+    enregistrerGrossiste(id: string, libelle: String, contact: string, email: string): Observable<Reponse> {
+        let mesParams = new HttpParams();        
+        mesParams = mesParams.append('id', id.toString());
+        mesParams = mesParams.append('denomination', libelle.toString());
+        mesParams = mesParams.append('contact', contact);
+        mesParams = mesParams.append('email', email);
+        return this.httpclient.get<Reponse>(this.webserviceUri.concat("/enregistrerGrossiste"),
             {
                 params: mesParams
             });

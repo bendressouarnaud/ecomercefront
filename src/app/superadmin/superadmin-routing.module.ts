@@ -6,6 +6,7 @@ import { PoduitsComponent } from './poduits/poduits.component';
 import { SouspoduitsComponent } from './souspoduits/souspoduits.component';
 import { DetailsousproduitComponent } from './detailsousproduit/detailsousproduit.component';
 import { ParametresComponent } from './parametres/parametres.component';
+import { GrossisteComponent } from './grossiste/grossiste.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path:'parametre',
     component: ParametresComponent
+  },
+  {
+    path:'grossiste',
+    component: GrossisteComponent
   }
 ];
 

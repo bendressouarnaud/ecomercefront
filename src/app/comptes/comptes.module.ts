@@ -46,10 +46,11 @@ import { DetailComponent } from './detail/detail.component';
 import { RetourarticleComponent } from './retourarticle/retourarticle.component';
 import { PromotionComponent } from './promotion/promotion.component';
 import { CommandeComponent } from './commande/commande.component';
+import { LiengrossisteComponent } from './liengrossiste/liengrossiste.component';
 
 
 @NgModule({
-  declarations: [GestioncompteComponent, GestioncommerceComponent, GestionrapportComponent, AccueilsupComponent, ConfigactiviteComponent, RdvsupComponent, AgendasupComponent, ReunionComponent, PerformanceComponent, HistoriqueComponent, AddresseComponent, ConfigequipeComponent, ConfigmotifComponent, NomenclatureComponent, DetailnomenclatureComponent, ParametresComponent, DevisComponent, StatdevisequipeComponent, StatdevisattenteComponent, ActivitecommercialeComponent, ClientsComponent, UserdetailsComponent, SantefamilleComponent, SanteavantageComponent, EmplacementComponent, PeriodeComponent, GestionmairieComponent, ArticleComponent, DetailComponent, RetourarticleComponent, PromotionComponent, CommandeComponent],
+  declarations: [GestioncompteComponent, GestioncommerceComponent, GestionrapportComponent, AccueilsupComponent, ConfigactiviteComponent, RdvsupComponent, AgendasupComponent, ReunionComponent, PerformanceComponent, HistoriqueComponent, AddresseComponent, ConfigequipeComponent, ConfigmotifComponent, NomenclatureComponent, DetailnomenclatureComponent, ParametresComponent, DevisComponent, StatdevisequipeComponent, StatdevisattenteComponent, ActivitecommercialeComponent, ClientsComponent, UserdetailsComponent, SantefamilleComponent, SanteavantageComponent, EmplacementComponent, PeriodeComponent, GestionmairieComponent, ArticleComponent, DetailComponent, RetourarticleComponent, PromotionComponent, CommandeComponent, LiengrossisteComponent],
   imports: [
     CommonModule,
     ComptesRoutingModule,
