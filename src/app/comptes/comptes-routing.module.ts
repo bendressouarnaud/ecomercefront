@@ -31,6 +31,7 @@ import { ArticleComponent } from './article/article.component';
 import { RetourarticleComponent } from './retourarticle/retourarticle.component';
 import { PromotionComponent } from './promotion/promotion.component';
 import { CommandeComponent } from './commande/commande.component';
+import { LiengrossisteComponent } from './liengrossiste/liengrossiste.component';
 
 const routes: Routes = [
   {
@@ -151,6 +152,10 @@ const routes: Routes = [
   {
     path:'commande',
     component: CommandeComponent
+  },
+  {
+    path:'liengrossiste',
+    component: LiengrossisteComponent
   }
 ];
 
