@@ -123,6 +123,8 @@ import { BeanArticleCommande } from "../mesbeans/beanarticlecommande";
 import { Beanapprobation } from "../mesbeans/beanapprobation";
 import { BeanArticleUpdate } from "../mesbeans/beanarticleupdate";
 import { Grossiste } from "../mesbeans/grossiste";
+import { BeanDataLienGrossiste } from "../mesbeans/beandataliengrossiste";
+import { BeanPaiementGrossiste } from "../mesbeans/beanpaiementgrossiste";
 
 @Injectable({
     providedIn: 'root'
@@ -132,8 +134,8 @@ import { Grossiste } from "../mesbeans/grossiste";
 export class MeswebservService {
 
     /* Attributes */
-    private webserviceUri: String = "http://localhost:8080/backendcommerce";
-    //private webserviceUri: String = "https://ankkapp.com/backendcommerce";
+    //private webserviceUri: String = "http://localhost:8080/backendcommerce";
+    private webserviceUri: String = "https://ankkapp.com/backendcommerce";
     private mtoken = "";
 
     constructor(private httpclient: HttpClient) { }
@@ -419,6 +421,13 @@ export class MeswebservService {
     // Get Articles
     getcompanyarticles(): Observable<Article[]> {
         return this.httpclient.get<Article[]>(this.webserviceUri.concat("/getcompanyarticles"),
+            {});
+    }
+
+
+    // Get Lien Grosiste data
+    getgrossisteliendata(): Observable<BeanDataLienGrossiste[]> {
+        return this.httpclient.get<BeanDataLienGrossiste[]>(this.webserviceUri.concat("/getgrossisteliendata"),
             {});
     }
 
@@ -1009,6 +1018,11 @@ export class MeswebservService {
     // Save Article:
     enregistrerArticle(donnees: FormData): Observable<Reponse> {
         return this.httpclient.post<Reponse>(this.webserviceUri.concat("/savearticles"), donnees, {});
+    }
+
+    // Save Article:
+    enregistrerForfaitGrosssiste(donnees: FormData): Observable<Reponse> {
+        return this.httpclient.post<Reponse>(this.webserviceUri.concat("/savegrossisteprice"), donnees, {});
     }
 
     // Save Article & Promotion:
@@ -2835,6 +2849,11 @@ export class MeswebservService {
     // Get ONGOING COMMANDE
     getongoingcommande(fdt: FormData): Observable<BeanOngoingCommande[]> {
         return this.httpclient.post<BeanOngoingCommande[]>(this.webserviceUri.concat("/getongoingcommande"), fdt, {});
+    }
+
+    // Get GROSSISTE DATA
+    getgrossistepaiement(): Observable<BeanPaiementGrossiste[]> {
+        return this.httpclient.get<BeanPaiementGrossiste[]>(this.webserviceUri.concat("/getgrossistepaiement"), {});
     }
 
     // Get All ARTICLEs from one COMMANDE :

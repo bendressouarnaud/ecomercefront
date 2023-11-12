@@ -96,7 +96,7 @@ export class GrossisteComponent implements OnInit {
 
   // Save 
   enregistrer(): void {
-    if(this.libelle.length > 0){
+    if(this.libelle.length > 2){
       this.meswebservices.enregistrerGrossiste(this.id,this.libelle,  this.contact, this.email).toPromise().then(
         resultat => {
           if (resultat.element == "ok") { 
@@ -105,13 +105,13 @@ export class GrossisteComponent implements OnInit {
             location.reload();
           }
           else if (resultat.element == "pok") {
-            this.warnmessage("Le code renseigné est déjà attribué à une amirie !");
+            this.warnmessage("Le mail renseigné est déjà attribué !");
           }
         }
       )
     }
     else{
-      this.warnmessage("Veuillez renseigner la dénomination du grossiste !");
+      this.warnmessage("La dénomination du grossiste doit contenir au moins 3 lettres !");
     }
     
   }

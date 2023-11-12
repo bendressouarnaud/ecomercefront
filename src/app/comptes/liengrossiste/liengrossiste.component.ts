@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from 'src/app/mesbeans/article';
+import { BeanDataLienGrossiste } from 'src/app/mesbeans/beandataliengrossiste';
 import { Grossiste } from 'src/app/mesbeans/grossiste';
 import { Produits } from 'src/app/mesbeans/produits';
 import { MeswebservService } from 'src/app/messervices/meswebserv.service';
@@ -17,6 +18,7 @@ export class LiengrossisteComponent implements OnInit {
   liste: Article[];
   listeGrossiste: Grossiste[];
   listeproduit: Produits[];
+  listehisto: BeanDataLienGrossiste[];
 
   getData: boolean = false;
   getDataHisto: boolean = false;
@@ -24,10 +26,11 @@ export class LiengrossisteComponent implements OnInit {
   publication = new Date();
   id = "0";
   prix = "0";
+  prixforfait = "0";
   prixUdt = "0";
   idspr = 0;
-  idgro = 0;
-  idart = 0;
+  idgro: number = 0;
+  idart: number = 0;
   idprod = 0;
   iddet = 0;
   libelle = "";
@@ -55,6 +58,7 @@ export class LiengrossisteComponent implements OnInit {
   ngOnInit(): void {
     this.getcompanyarticles();
     this.getAllGrossiste();
+    this.getgrossisteliendata();
   }
 
 
@@ -66,7 +70,7 @@ export class LiengrossisteComponent implements OnInit {
 
   ouvrirzonegestion(): void {
     // Open modal :
-    this.libelle = "";
+    this.prixforfait = "0";
     this.id = "0";
     this.prix = "0";
     // Reset this :
@@ -82,6 +86,8 @@ export class LiengrossisteComponent implements OnInit {
           // Succes
           if (resultat.length > 0) {
             this.liste = resultat;
+            this.idart = resultat[0].idart;
+            this.onProduitChange();
           }
         }
       )
@@ -95,6 +101,7 @@ export class LiengrossisteComponent implements OnInit {
           // Succes
           if (resultat.length > 0) {
             this.listeGrossiste = resultat;
+            this.idgro = resultat[0].idgro;
           }
         }
       )
@@ -104,15 +111,11 @@ export class LiengrossisteComponent implements OnInit {
   // Save 
   enregistrer(): void {
     this.formData.append("id", this.id);
-    this.formData.append("libelle", this.libelle);
-    this.formData.append("prix", this.prix);
-    // Dates :
-    /*let momentVariable = moment(this.publication, 'MM-DD-YYYY');
-    let dates = momentVariable.format('YYYY-MM-DD');
-    this.formData.append("publication", dates);
-    this.formData.append("detail", this.detail);
-    this.formData.append("iddet", this.iddet.toString());
-    this.meswebservices.enregistrerArticle(this.formData).toPromise().then(
+    this.formData.append("idart", this.idart.toString());
+    this.formData.append("idgro", this.idgro.toString());
+    this.formData.append("prixforfait", this.prixforfait);
+    //  :
+    this.meswebservices.enregistrerForfaitGrosssiste(this.formData).toPromise().then(
       resultat => {
         if (resultat.element == "OK") {
           location.reload();
@@ -121,8 +124,66 @@ export class LiengrossisteComponent implements OnInit {
           alert("Erreur de traitement !");
         }
       }
-    )*/
+    );
   }
 
+  // 
+  onProduitChange(): void {
+    // Browse :    
+    this.liste.forEach(
+      d => {
+        if(d.idart == this.idart){
+          this.prix = d.prix.toLocaleString();
+          return;
+        }
+      }
+    );
+  }
 
+  //
+  consulter(idlgo: string, idart: number, idgro: number, prixforfait: string){
+    this.id = idlgo;
+    this.idart = idart;
+    this.idgro = idgro;
+    this.prixforfait = prixforfait;
+    this.formData = new FormData();
+    $('#myModal').modal();
+  }
+
+  //
+  getgrossisteliendata(): void {
+    this.meswebservices.getgrossisteliendata().toPromise()
+      .then(
+        resultat => {
+          // Succes
+          if (resultat.length > 0) {
+            this.listehisto = resultat;
+          }
+
+          // Get it :
+          this.getData = true;
+
+          if (!this.alreadyInit) {
+            setTimeout(function () {
+              $('#datatables').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                  [10, 25, 50, -1],
+                  [10, 25, 50, "All"]
+                ],
+                responsive: true,
+                language: {
+                  search: "_INPUT_",
+                  searchPlaceholder: "Search records",
+                }
+
+              });
+            }, 1000);
+
+            this.alreadyInit = true;
+          }
+
+        }
+      )
+  }
 }
