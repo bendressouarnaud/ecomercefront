@@ -123,6 +123,7 @@ import { BeanArticleCommande } from "../mesbeans/beanarticlecommande";
 import { Beanapprobation } from "../mesbeans/beanapprobation";
 import { BeanArticleUpdate } from "../mesbeans/beanarticleupdate";
 import { Grossiste } from "../mesbeans/grossiste";
+import { Client } from "../mesbeans/clientgouabo";
 import { BeanDataLienGrossiste } from "../mesbeans/beandataliengrossiste";
 import { BeanPaiementGrossiste } from "../mesbeans/beanpaiementgrossiste";
 
@@ -337,6 +338,12 @@ export class MeswebservService {
     // Get 
     getAllGrossiste(): Observable<Grossiste[]> {
         return this.httpclient.get<Grossiste[]>(this.webserviceUri.concat("/getAllGrossiste"),
+            {});
+    }
+
+    // Get 
+    getAllClients(): Observable<Client[]> {
+        return this.httpclient.get<Client[]>(this.webserviceUri.concat("/getAllClients"),
             {});
     }
 
