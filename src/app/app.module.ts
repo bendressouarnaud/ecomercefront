@@ -63,6 +63,7 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive'; // this includes the
 import { MomentModule } from 'angular2-moment';
 import { SuperviseurModule } from './superviseur/superviseur.module';
 import { SuperadminModule } from './superadmin/superadmin.module';
+import { ConfidentialiteComponent } from './confidentialite/confidentialite.component';
 
 @NgModule({
   exports: [
@@ -98,7 +99,8 @@ import { SuperadminModule } from './superadmin/superadmin.module';
     MatTooltipModule,
     MatNativeDateModule
   ],
-  imports: [ComptesModule, CommercialModule, InfasModule, InspecteurModule, ResponsableModule, DirecteuragjModule, DirecteurModule, TresorierModule, SuperviseurModule, SuperadminModule]
+  imports: [ComptesModule, CommercialModule, InfasModule, InspecteurModule, ResponsableModule, DirecteuragjModule, DirecteurModule, TresorierModule, SuperviseurModule, SuperadminModule],
+  declarations: [ConfidentialiteComponent]
 })
 export class MaterialModule {}
 

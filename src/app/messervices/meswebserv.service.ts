@@ -123,6 +123,7 @@ import { BeanArticleCommande } from "../mesbeans/beanarticlecommande";
 import { Beanapprobation } from "../mesbeans/beanapprobation";
 import { BeanArticleUpdate } from "../mesbeans/beanarticleupdate";
 import { Grossiste } from "../mesbeans/grossiste";
+import { Client } from "../mesbeans/clientgouabo";
 
 @Injectable({
     providedIn: 'root'
@@ -132,8 +133,8 @@ import { Grossiste } from "../mesbeans/grossiste";
 export class MeswebservService {
 
     /* Attributes */
-    private webserviceUri: String = "http://localhost:8080/backendcommerce";
-    //private webserviceUri: String = "https://ankkapp.com/backendcommerce";
+    //private webserviceUri: String = "http://localhost:8080/backendcommerce";
+    private webserviceUri: String = "https://ankkapp.com/backendcommerce";
     private mtoken = "";
 
     constructor(private httpclient: HttpClient) { }
@@ -335,6 +336,12 @@ export class MeswebservService {
     // Get 
     getAllGrossiste(): Observable<Grossiste[]> {
         return this.httpclient.get<Grossiste[]>(this.webserviceUri.concat("/getAllGrossiste"),
+            {});
+    }
+
+    // Get 
+    getAllClients(): Observable<Client[]> {
+        return this.httpclient.get<Client[]>(this.webserviceUri.concat("/getAllClients"),
             {});
     }
 

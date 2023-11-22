@@ -18,10 +18,11 @@ import { SouspoduitsComponent } from './souspoduits/souspoduits.component';
 import { DetailsousproduitComponent } from './detailsousproduit/detailsousproduit.component';
 import { ParametresComponent } from './parametres/parametres.component';
 import { GrossisteComponent } from './grossiste/grossiste.component';
+import { ClientComponent } from './client/client.component';
 
 
 @NgModule({
-  declarations: [AccueilComponent, MairieComponent, PoduitsComponent, SouspoduitsComponent, DetailsousproduitComponent, ParametresComponent, GrossisteComponent],
+  declarations: [AccueilComponent, MairieComponent, PoduitsComponent, SouspoduitsComponent, DetailsousproduitComponent, ParametresComponent, GrossisteComponent, ClientComponent],
   imports: [
     CommonModule,
     SuperadminRoutingModule,

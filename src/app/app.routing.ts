@@ -3,8 +3,13 @@ import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { ConnexionService } from './messervices/connexion.service';
+import { ConfidentialiteComponent } from './confidentialite/confidentialite.component';
 
 export const AppRoutes: Routes = [
+    {
+        path:'confidentialite',
+        component: ConfidentialiteComponent
+    },
     {
         path: '',
         redirectTo: 'pages/login',
@@ -97,5 +102,5 @@ export const AppRoutes: Routes = [
             path: 'pages',
             loadChildren: './pages/pages.module#PagesModule'
         }]
-    }
+    }    
 ];

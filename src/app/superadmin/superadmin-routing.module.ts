@@ -7,6 +7,7 @@ import { SouspoduitsComponent } from './souspoduits/souspoduits.component';
 import { DetailsousproduitComponent } from './detailsousproduit/detailsousproduit.component';
 import { ParametresComponent } from './parametres/parametres.component';
 import { GrossisteComponent } from './grossiste/grossiste.component';
+import { ClientComponent } from './client/client.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path:'grossiste',
     component: GrossisteComponent
+  },
+  {
+    path:'clients',
+    component: ClientComponent
   }
 ];
 
