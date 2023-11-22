@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Beanapprobation } from 'src/app/mesbeans/beanapprobation';
 import { BeanArticleCommande } from 'src/app/mesbeans/beanarticlecommande';
 import { BeanOngoingCommande } from 'src/app/mesbeans/beancommande';
+import { BeanPaiementGrossiste } from 'src/app/mesbeans/beanpaiementgrossiste';
 import { MeswebservService } from 'src/app/messervices/meswebserv.service';
 
 declare const $: any;
@@ -19,8 +20,10 @@ export class CommandeComponent implements OnInit {
   listeAttente: BeanOngoingCommande[];
   listeTraite: BeanOngoingCommande[];
   listeArticle: BeanArticleCommande[];
+  listePaiementGrossiste: BeanPaiementGrossiste[];
   getListeAttente = false;
   getListeTraite = false;
+  getPaiementGrossiste = false;
   getCommande = false;
   coutTotal = 0;
   //------
@@ -42,6 +45,7 @@ export class CommandeComponent implements OnInit {
   ngOnInit(): void {
     this.getongoingcommande();
     this.getProcessedCommande();
+    this.getGrossisteData();
   }
 
 
@@ -98,6 +102,40 @@ export class CommandeComponent implements OnInit {
 
           setTimeout(function () {
             $('#datatabletraite').DataTable({
+              "pagingType": "full_numbers",
+              "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+              ],
+              responsive: true,
+              language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Search records",
+              },
+              "order": [[4, "desc"]]
+            });
+          }, 500);
+        },
+      )
+  }
+
+
+  // Grossiste :
+  getGrossisteData(): void {
+    this.meswebservices.getgrossistepaiement().toPromise()
+      .then(
+        resultat => {
+
+          // Succes
+          if (resultat.length > 0) {
+            this.listePaiementGrossiste = resultat;
+          }
+
+          //
+          this.getPaiementGrossiste = true;
+
+          setTimeout(function () {
+            $('#datatablegrossiste').DataTable({
               "pagingType": "full_numbers",
               "lengthMenu": [
                 [10, 25, 50, -1],

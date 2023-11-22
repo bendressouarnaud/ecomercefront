@@ -35,7 +35,7 @@
                                 <div class="col-sm-10">
                                     <div class="row">
 
-                                        <div class="col-md-5">
+                                        <div class="col-md-4">
                                             <mat-form-field>
                                                 <mat-select placeholder="Grossiste" [(value)]="idgro" name="idgro" id="idgro">
                                                     <mat-option *ngFor="let dl of listeGrossiste" [value]="dl.idgro">
@@ -45,9 +45,10 @@
                                             </mat-form-field>
                                         </div>
 
-                                        <div class="col-md-5">
+                                        <div class="col-md-6">
                                             <mat-form-field>
-                                                <mat-select placeholder="Produit" [(value)]="idart" name="idart" id="idart">
+                                                <mat-select placeholder="Produit" [(value)]="idart" name="idart" id="idart" 
+                                                (selectionChange)="onProduitChange()">
                                                     <mat-option *ngFor="let dt of liste" [value]="dt.idart">
                                                         {{ dt.libelle }}
                                                     </mat-option>
@@ -61,11 +62,24 @@
 
                             <div class="row">
                                 <label class="col-sm-2 col-form-label">&nbsp;</label>
-                                <div class="col-md-3">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput [(ngModel)]="prix" name='prix' type="text" placeholder="Prix" maxlength="7">
-                                    </mat-form-field>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="prix" name='prix' type="text" disabled
+                                                placeholder="Prix de base" maxlength="10">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput [(ngModel)]="prixforfait" name='prixforfait' type="text" 
+                                                placeholder="Prix forfait" maxlength="10">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
                                 </div>
+                                
                             </div>
 
                         </form>
@@ -93,12 +107,12 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link icone active" (click)="ouvrirzonegestion()" role="tablist">
+                            <a class="nav-link" href="#/gestion/article" role="tablist">
                                 <i class="material-icons">
-                                    <img src="assets/img/ajout.png" width="85" height="70" />
-                                </i> Nouveau
+                                    <img src="assets/img/article.jpeg" width="85" height="70" />
+                                </i> Article
                             </a>
-                        </li>
+                        </li>                    
 
                         <li class="nav-item">
                             <a class="nav-link" href="#/gestion/delairetour" role="tablist">
@@ -123,6 +137,14 @@
                                 </i> Commandes
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link icone active" (click)="ouvrirzonegestion()" role="tablist">
+                                <i class="material-icons">
+                                    <img src="assets/img/ajout.png" width="85" height="70" />
+                                </i> Nouveau
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -141,31 +163,25 @@
                                 cellspacing="0" width="100%" style="width:100%" *ngIf="this.getData">
                                 <thead>
                                     <tr>
-                                        <th>Illustration</th>
-                                        <th>Libell&eacute;</th>
-                                        <th>Type d&eacute;tail</th>
-                                        <th>Prix</th>
+                                        <th>Grossiste</th>
+                                        <th>Article</th>
+                                        <th>Prix de base</th>
+                                        <th>Prix forfait</th>
                                         <th class="disabled-sorting text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let dt of liste">
-                                        <td><img src="https://firebasestorage.googleapis.com/v0/b/gestionpanneaux.appspot.com/o/{{ dt.lienweb }}?alt=media"
-                                                id="myimg" width="85" height="70" /></td>
-                                        <td class="lib">{{ dt.libelle }}</td>
-                                        <td class="lib">{{ dt.appartenance }}</td>
+                                    <tr *ngFor="let dt of listehisto">
+                                        <td class="lib">{{ dt.grossiste }}</td>
+                                        <td class="lib">{{ dt.article }}</td>
                                         <td class="prix">{{ dt.prix.toLocaleString() }}</td>
+                                        <td class="prix">{{ dt.prixforfait.toLocaleString() }}</td>
                                         <td class="text-center">
 
-                                            <a title="Mise &agrave; jour de l'article"
-                                                (click)="miseajourarticle( dt.idart )"
+                                            <a title="Consulter"
+                                                (click)="consulter( dt.idlgo, dt.idart, dt.idgro, dt.prixforfait )"
                                                 class="btn btn-link btn-success btn-just-icon edit"><i
                                                     class="material-icons">build</i></a>
-
-                                            <!--<a title="Modifier"
-                                                (click)="afficherDonnee( dt.idper, dt.libelle, dt.frequence, dt.codes, dt.jour )"
-                                                class="btn btn-link btn-danger btn-just-icon edit"><i
-                                                    class="material-icons">dvr</i></a>-->
                                         </td>
                                     </tr>
                                 </tbody>

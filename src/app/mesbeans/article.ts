@@ -1,6 +1,6 @@
 export class Article{
 
-    idart : Number;
+    idart : number;
     libelle : string;
     lienweb : string;
     appartenance : string;
