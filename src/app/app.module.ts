@@ -64,6 +64,8 @@ import { MomentModule } from 'angular2-moment';
 import { SuperviseurModule } from './superviseur/superviseur.module';
 import { SuperadminModule } from './superadmin/superadmin.module';
 import { ConfidentialiteComponent } from './confidentialite/confidentialite.component';
+import { ContactComponent } from './contact/contact.component';
+import { AssistanceComponent } from './assistance/assistance.component';
 
 @NgModule({
   exports: [
@@ -100,7 +102,7 @@ import { ConfidentialiteComponent } from './confidentialite/confidentialite.comp
     MatNativeDateModule
   ],
   imports: [ComptesModule, CommercialModule, InfasModule, InspecteurModule, ResponsableModule, DirecteuragjModule, DirecteurModule, TresorierModule, SuperviseurModule, SuperadminModule],
-  declarations: [ConfidentialiteComponent]
+  declarations: [ConfidentialiteComponent, ContactComponent, AssistanceComponent]
 })
 export class MaterialModule {}
 

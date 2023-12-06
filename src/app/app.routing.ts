@@ -4,11 +4,21 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { ConnexionService } from './messervices/connexion.service';
 import { ConfidentialiteComponent } from './confidentialite/confidentialite.component';
+import { ContactComponent } from './contact/contact.component';
+import { AssistanceComponent } from './assistance/assistance.component';
 
 export const AppRoutes: Routes = [
     {
         path:'confidentialite',
         component: ConfidentialiteComponent
+    },
+    {
+        path:'contact',
+        component: ContactComponent
+    },
+    {
+        path:'assistance',
+        component: AssistanceComponent
     },
     {
         path: '',
