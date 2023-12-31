@@ -66,6 +66,7 @@ import { SuperadminModule } from './superadmin/superadmin.module';
 import { ConfidentialiteComponent } from './confidentialite/confidentialite.component';
 import { ContactComponent } from './contact/contact.component';
 import { AssistanceComponent } from './assistance/assistance.component';
+import { RecherchemotComponent } from './recherchemot/recherchemot.component';
 
 @NgModule({
   exports: [
@@ -101,8 +102,11 @@ import { AssistanceComponent } from './assistance/assistance.component';
     MatTooltipModule,
     MatNativeDateModule
   ],
-  imports: [ComptesModule, CommercialModule, InfasModule, InspecteurModule, ResponsableModule, DirecteuragjModule, DirecteurModule, TresorierModule, SuperviseurModule, SuperadminModule],
-  declarations: [ConfidentialiteComponent, ContactComponent, AssistanceComponent]
+  imports: [CommonModule, 
+    MatInputModule,
+        FormsModule,
+    ComptesModule, CommercialModule, InfasModule, InspecteurModule, ResponsableModule, DirecteuragjModule, DirecteurModule, TresorierModule, SuperviseurModule, SuperadminModule],
+  declarations: [ConfidentialiteComponent, ContactComponent, AssistanceComponent, RecherchemotComponent]
 })
 export class MaterialModule {}
 
@@ -110,7 +114,8 @@ export class MaterialModule {}
     imports:      [
         CommonModule,
         BrowserAnimationsModule,
-        FormsModule,
+        MatInputModule,
+        FormsModule,        
         RouterModule.forRoot(AppRoutes,{
           useHash: true
         }),

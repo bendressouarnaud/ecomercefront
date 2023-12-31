@@ -6,8 +6,9 @@ import { ConnexionService } from './messervices/connexion.service';
 import { ConfidentialiteComponent } from './confidentialite/confidentialite.component';
 import { ContactComponent } from './contact/contact.component';
 import { AssistanceComponent } from './assistance/assistance.component';
+import { RecherchemotComponent } from './recherchemot/recherchemot.component';
 
-export const AppRoutes: Routes = [
+export const AppRoutes: Routes = [    
     {
         path:'confidentialite',
         component: ConfidentialiteComponent
@@ -19,6 +20,10 @@ export const AppRoutes: Routes = [
     {
         path:'assistance',
         component: AssistanceComponent
+    },
+    {
+        path:'messageprophete',
+        component: RecherchemotComponent
     },
     {
         path: '',

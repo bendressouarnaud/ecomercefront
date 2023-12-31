@@ -126,6 +126,7 @@ import { Grossiste } from "../mesbeans/grossiste";
 import { Client } from "../mesbeans/clientgouabo";
 import { BeanDataLienGrossiste } from "../mesbeans/beandataliengrossiste";
 import { BeanPaiementGrossiste } from "../mesbeans/beanpaiementgrossiste";
+import { BeanLigneOccurence } from "../mesbeans/beanligneoccurence";
 
 @Injectable({
     providedIn: 'root'
@@ -1025,6 +1026,11 @@ export class MeswebservService {
     // Save Article:
     enregistrerArticle(donnees: FormData): Observable<Reponse> {
         return this.httpclient.post<Reponse>(this.webserviceUri.concat("/savearticles"), donnees, {});
+    }
+
+    // Send message:
+    sendWordToRead(donnees: FormData): Observable<BeanLigneOccurence[]> {
+        return this.httpclient.post<BeanLigneOccurence[]>(this.webserviceUri.concat("/sendWordToRead"), donnees, {});
     }
 
     // Save Article:
