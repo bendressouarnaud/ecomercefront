@@ -52,7 +52,7 @@ export class RecherchemotComponent implements OnInit {
   ouvrirzonegestion(): void {
     // Open modal :
     this.expression = "";
-    this.libfichier = "";
+    //this.libfichier = "";
     // Reset this :
     //this.formData = new FormData();
     $('#myModal').modal();
