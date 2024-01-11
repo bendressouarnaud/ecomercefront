@@ -22,7 +22,7 @@
                                         <div class="col-md-10">
                                             <mat-form-field class="example-full-width">
                                                 <input matInput [(ngModel)]="expression" name='expression' type="text"
-                                                    placeholder="Ins&eacute;rer le texte &agrave; rechercher ..." maxlength="82">
+                                                    placeholder="Ins&eacute;rer le texte &agrave; rechercher ..." maxlength="100">
                                             </mat-form-field>
                                         </div>
 
@@ -30,7 +30,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <!--<div class="row">
                                 <label class="col-sm-2 col-form-label">&nbsp;</label>
                                 <div class="col-md-5">
                                     <button type="button" mat-raised-button (click)="fileInput.click()"
@@ -43,7 +43,7 @@
                                 <div class="col-md-5">
                                     <label class="col-form-label">{{ libfichier }}</label>
                                 </div>
-                            </div>
+                            </div>-->
 
                         </form>
                     </div>
@@ -88,6 +88,7 @@
                                 cellspacing="0" width="100%" style="width:100%" *ngIf="this.getData">
                                 <thead>
                                     <tr>
+                                        <th>Titre</th>
                                         <th>Page</th>
                                         <th>Ligne</th>
                                         <th>Emplacement</th>
@@ -95,6 +96,7 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let dt of liste">
+                                        <td style="font-weight: bold;">{{ dt.titre }}</td>
                                         <td style="font-weight: bold;">{{ dt.page }}</td>
                                         <td style="font-weight: bold;">{{ dt.ligne }}</td>
                                         <td>{{ dt.contenu }}</td>

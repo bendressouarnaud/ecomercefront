@@ -68,10 +68,10 @@ export class RecherchemotComponent implements OnInit {
       alert("Veuillez saisir le TEXTE à rechercher ... ");
       return;
     }
-    else if (!this.formData.has("brochure")) {
+    /*else if (!this.formData.has("brochure")) {
       alert("Veuillez sélectionner le fichier dans lequel rechercher le texte ... ");
       return;
-    }
+    }*/
 
     if (this.formData.has("expression")) {
       this.formData.delete("expression");
