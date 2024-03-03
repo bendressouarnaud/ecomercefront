@@ -22,6 +22,8 @@ export class PromotionComponent implements OnInit {
   getDateFin = new Date();
   libellepromotion = "";
   reduction = "0";
+  pourcentage = 0;
+  prix = 0;
 
 
   listeHisto: Beanpromotion[];
@@ -81,6 +83,28 @@ export class PromotionComponent implements OnInit {
     $('#myModal').modal();
   }
 
+  // Modify :
+  miseajour( idprn: number ): void {
+    //alert(idprn);
+    console.log(idprn);
+    // Browse the array :
+    this.listeHisto.forEach(
+      d => {
+        if(d.idprn == idprn){
+          this.id = idprn;
+          this.libellepromotion = d.libelle;
+          this.getDateDebut = new Date(d.datedebut);
+          this.getDateFin = new Date(d.datefin);
+          this.reduction = d.reduction.toString();
+          this.pourcentage = d.modepourcentage;
+          this.prix = d.prix;
+          return;
+        }
+      }
+    );    
+    $('#myModal').modal();
+  }
+
 
   // Save 
   enregistrer(): void {
@@ -98,6 +122,8 @@ export class PromotionComponent implements OnInit {
     this.formData.append("datefin", dateFin);
     this.formData.append("reduction", this.reduction);
     this.formData.append("libellepromotion", this.libellepromotion);
+    this.formData.append("pourcentage", this.pourcentage.toString());
+    this.formData.append("prix", this.prix.toString());
     // Dates :
     this.meswebservices.enregistrerPromotion(this.formData).toPromise().then(
       resultat => {
